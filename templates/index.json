@@ -1,0 +1,9 @@
+{
+    "sections": {
+            "hero": "hero"
+    },
+    "order": [
+        "header-group"
+    ]
+
+}

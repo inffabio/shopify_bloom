@@ -1,0 +1,11 @@
+[
+    {
+     "name": "theme_info",
+     "theme_name" : "theme from scratch",
+     "theme_author": "Fabio Lima",
+     "theme_version": "1.0.0",
+     "theme_documentation_url" : "https://github.com/inffabio/shopify_bloom",
+     "theme_support_url" : "https://github.com/inffabio/shopify_bloom/issues"
+   }
+
+]
