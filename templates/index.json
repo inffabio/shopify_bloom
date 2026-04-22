@@ -1,9 +1,10 @@
 {
     "sections": {
-            "hero": "hero"
+        "hero": {
+            "type": "hero"
+        }
     },
     "order": [
-        "header-group"
+        "hero"
     ]
-
 }

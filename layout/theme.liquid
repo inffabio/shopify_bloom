@@ -1,4 +1,5 @@
 <html>
+     {{' tailwind.output.css' | asset_url | stylesheet_tag }}
     <head>
         <title>{{ page_title }}</title>
         {{ content_for_header }}
@@ -6,7 +7,9 @@
     </head>
 
     <body>
-        {% section 'header-group' %}
+        {% sections 'header-group' %}
         {{ content_for_layout }}
+       
+        {% sections 'footer-group' %}
     </body>
 </html>

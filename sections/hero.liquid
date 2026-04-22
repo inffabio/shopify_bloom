@@ -1,67 +1,17 @@
 
-<section class="hero">
-   {% stylesheet %}
-        .hero {
-            background-image: url('{{ section.settings.background_image | image_url }}');
-            background-size: cover;
-            background-position: center;
-            height: {{ section.settings.height }}px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: {{ section.settings.text_color }};
-            position: relative;
-        }
+{% stylesheet %}
+    /* Hero styling handled via Tailwind utilities */
+{% endstylesheet %}
 
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, {{ section.settings.overlay_opacity }});
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 600px;
-            padding: 20px;
-        }
-
-        .hero-title {
-            font-size: 48px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .hero-subtitle {
-            font-size: 20px;
-            margin-bottom: 30px;
-        }
-
-        .hero-button {
-            background-color: {{ section.settings.button_color }};
-            color: {{ section.settings.button_text_color }};
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 4px;
-            display: inline-block;
-            font-weight: bold;
-            transition: opacity 0.3s;
-        }
-
-        .hero-button:hover {
-            opacity: 0.9;
-        }
-    {% endstylesheet %}
-
-    <div class="hero-content">
-        <h1 class="hero-title">{{ section.settings.title }}</h1>
-        <p class="hero-subtitle">{{ section.settings.subtitle }}</p>
-        <a href="{{ section.settings.button_link }}" class="hero-button">
+<section class="relative z-10 py-8 sm:py-8 md:py-12 px-4 sm:px-6">
+    <div class="container mx-auto max-w-4xl text-center flex flex-col items-center">
+        <h2 class="text-2xl sm:text-3xl md:text-4xl font-serif text-[#8B6F5C] mb-4 sm:mb-6 text-balance">
+            {{ section.settings.heading }}
+        </h2>
+        <p class="text-base sm:text-lg text-[#A08577] mb-6 sm:mb-8 max-w-2xl leading-relaxed px-4">
+            {{ section.settings.description }}
+        </p>
+        <a href="{{ section.settings.button_link }}" class="inline-block rounded-full bg-[#F8C8DC] hover:bg-[#F5B5CE] text-white px-8 py-4 text-base shadow-lg transition-colors">
             {{ section.settings.button_text }}
         </a>
     </div>
@@ -72,31 +22,16 @@
     "name": "Hero Section",
     "settings": [
         {
-            "type": "image_picker",
-            "id": "background_image",
-            "label": "Background Image"
-        },
-        {
-            "type": "range",
-            "id": "height",
-            "min": 300,
-            "max": 800,
-            "step": 50,
-            "unit": "px",
-            "label": "Height",
-            "default": 500
-        },
-        {
             "type": "text",
-            "id": "title",
-            "label": "Title",
-            "default": "Welcome to Our Store"
+            "id": "heading",
+            "label": "Heading",
+            "default": "Custom Mugs & Personalized Drinkware"
         },
         {
-            "type": "text",
-            "id": "subtitle",
-            "label": "Subtitle",
-            "default": "Discover amazing products"
+            "type": "textarea",
+            "id": "description",
+            "label": "Description",
+            "default": "Transform your daily moments with beautifully personalized mugs and tumblers. From custom designs to elegant sets, we create drinkware that reflects your unique style and brings joy to every sip."
         },
         {
             "type": "text",
@@ -105,36 +40,10 @@
             "default": "Shop Now"
         },
         {
-            "type": "url",
+            "type": "text",
             "id": "button_link",
-            "label": "Button Link"
-        },
-        {
-            "type": "color",
-            "id": "text_color",
-            "label": "Text Color",
-            "default": "#ffffff"
-        },
-        {
-            "type": "color",
-            "id": "button_color",
-            "label": "Button Color",
-            "default": "#000000"
-        },
-        {
-            "type": "color",
-            "id": "button_text_color",
-            "label": "Button Text Color",
-            "default": "#ffffff"
-        },
-        {
-            "type": "range",
-            "id": "overlay_opacity",
-            "min": 0,
-            "max": 1,
-            "step": 0.1,
-            "label": "Overlay Opacity",
-            "default": 0.3
+            "label": "Button Link",
+            "default": "#products"
         }
     ],
     "presets": [
@@ -145,3 +54,4 @@
     ]
 }
 {% endschema %}
+      
