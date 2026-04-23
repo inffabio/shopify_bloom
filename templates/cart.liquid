@@ -1,502 +1,251 @@
-<style>
-    .cart-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 20px;
-        font-family: var(--font-sans);
-    }
-
-    .cart-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 30px;
-        border-bottom: 1px solid #e5e5e5;
-        padding-bottom: 20px;
-    }
-
-    .cart-title {
-        font-size: 32px;
-        font-weight: 700;
-        margin: 0;
-        color: #1a1a1a;
-    }
-
-    .cart-count {
-        font-size: 16px;
-        color: #666;
-        background: #f8f8f8;
-        padding: 4px 12px;
-        border-radius: 20px;
-    }
-
-    .cart-empty {
-        text-align: center;
-        padding: 80px 20px;
-        color: #666;
-    }
-
-    .cart-empty h2 {
-        font-size: 24px;
-        margin-bottom: 16px;
-        color: #1a1a1a;
-    }
-
-    .cart-empty p {
-        font-size: 16px;
-        margin-bottom: 32px;
-    }
-
-    .continue-shopping-btn {
-        display: inline-block;
-        background: #000;
-        color: #fff;
-        padding: 12px 24px;
-        text-decoration: none;
-        border-radius: 4px;
-        font-weight: 500;
-        transition: background-color 0.2s;
-    }
-
-    .continue-shopping-btn:hover {
-        background: #333;
-    }
-
-    .cart-items {
-        margin-bottom: 40px;
-    }
-
-    .cart-note-section {
-        background: #f8f9fa;
-        border: 1px solid #e9ecef;
-        border-radius: 8px;
-        padding: 20px;
-        margin-bottom: 30px;
-    }
-
-    .cart-note-section h3 {
-        font-size: 16px;
-        font-weight: 600;
-        margin: 0 0 12px 0;
-        color: #1a1a1a;
-    }
-
-    .cart-note-section textarea {
-        width: 100%;
-        min-height: 80px;
-        padding: 12px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-family: inherit;
-        font-size: 14px;
-        resize: vertical;
-        background: #fff;
-    }
-
-    .cart-note-section textarea:focus {
-        outline: none;
-        border-color: #000;
-        box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
-    }
-
-    .cart-item {
-        display: grid;
-        grid-template-columns: 100px 1fr auto;
-        gap: 20px;
-        padding: 24px 0;
-        border-bottom: 1px solid #e5e5e5;
-        align-items: center;
-    }
-
-    .cart-item:last-child {
-        border-bottom: none;
-    }
-
-    .cart-item-image {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 8px;
-        border: 1px solid #e5e5e5;
-    }
-
-    .cart-item-details {
-        min-width: 0;
-    }
-
-    .cart-item-title {
-        font-size: 18px;
-        font-weight: 600;
-        color: #1a1a1a;
-        margin: 0 0 8px 0;
-        text-decoration: none;
-        display: block;
-    }
-
-    .cart-item-title:hover {
-        color: #666;
-    }
-
-    .cart-item-variant {
-        font-size: 14px;
-        color: #666;
-        margin: 0 0 8px 0;
-    }
-
-    .cart-item-price {
-        font-size: 16px;
-        font-weight: 600;
-        color: #1a1a1a;
-        margin: 0;
-    }
-
-    .cart-item-subtotal {
-        font-size: 14px;
-        font-weight: 500;
-        color: #666;
-        margin: 4px 0 0 0;
-    }
-
-    .cart-item-controls {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 12px;
-    }
-
-    .quantity-controls {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
-
-    .quantity-btn {
-        width: 32px;
-        height: 32px;
-        border: 1px solid #ddd;
-        background: #fff;
-        border-radius: 4px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
-        transition: all 0.2s;
-    }
-
-    .quantity-btn:hover {
-        background: #f8f8f8;
-        border-color: #ccc;
-    }
-
-    .quantity-btn:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-    }
-
-    .quantity-input {
-        width: 60px;
-        height: 32px;
-        padding: 0 8px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-align: center;
-        font-size: 14px;
-    }
-
-    .remove-item {
-        background: none;
-        border: none;
-        color: #999;
-        cursor: pointer;
-        font-size: 14px;
-        text-decoration: underline;
-        padding: 0;
-        transition: color 0.2s;
-    }
-
-    .remove-item:hover {
-        color: #666;
-    }
-
-    .cart-sidebar {
-        background: #f8f8f8;
-        padding: 24px;
-        border-radius: 8px;
-        position: sticky;
-        top: 20px;
-    }
-
-    .cart-summary {
-        margin-bottom: 24px;
-    }
-
-    .cart-summary h3 {
-        font-size: 20px;
-        font-weight: 600;
-        margin: 0 0 16px 0;
-        color: #1a1a1a;
-    }
-
-    .cart-summary-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 8px;
-        font-size: 14px;
-        color: #666;
-    }
-
-    .cart-summary-row.total {
-        font-size: 18px;
-        font-weight: 600;
-        color: #1a1a1a;
-        border-top: 1px solid #e5e5e5;
-        padding-top: 12px;
-        margin-top: 12px;
-    }
-
-    .checkout-btn {
-        width: 100%;
-        background: #000;
-        color: #fff;
-        border: none;
-        padding: 16px;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color 0.2s;
-        margin-bottom: 16px;
-    }
-
-    .checkout-btn:hover {
-        background: #333;
-    }
-
-    .checkout-btn:disabled {
-        background: #ccc;
-        cursor: not-allowed;
-    }
-
-    .cart-actions {
-        display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
-    }
-
-    .update-cart-btn,
-    .clear-cart-btn {
-        padding: 12px 20px;
-        border: 1px solid #ddd;
-        background: #fff;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.2s;
-        flex: 1;
-        min-width: 120px;
-    }
-
-    .update-cart-btn:hover,
-    .clear-cart-btn:hover {
-        background: #f8f8f8;
-        border-color: #ccc;
-        transform: translateY(-1px);
-    }
-
-    .clear-cart-btn {
-        color: #d32f2f;
-        border-color: #d32f2f;
-    }
-
-    .clear-cart-btn:hover {
-        background: #ffebee;
-        color: #b71c1c;
-    }
-
-    @media (max-width: 768px) {
-        .cart-container {
-            padding: 16px;
-        }
-
-        .cart-header {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 16px;
-        }
-
-        .cart-title {
-            font-size: 24px;
-        }
-
-        .cart-item {
-            grid-template-columns: 80px 1fr;
-            gap: 16px;
-            padding: 16px 0;
-        }
-
-        .cart-item-controls {
-            grid-column: 1 / -1;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .cart-sidebar {
-            position: static;
-            margin-top: 32px;
-        }
-
-        .cart-note-section {
-            margin-bottom: 20px;
-        }
-    }
-</style>
-
-<div class="cart-container">
-    <div class="cart-header">
-        <h1 class="cart-title">Shopping Cart</h1>
-        {% if cart.item_count > 0 %}
-            <span class="cart-count">{{ cart.item_count }} item{{ cart.item_count | pluralize: '', 's' }}</span>
-        {% endif %}
+<main class="container mx-auto px-4 sm:px-6 py-8">
+  <div class="max-w-7xl mx-auto">
+    <!-- Cart Header -->
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-8 pb-6 border-b border-[#F5D5C8]/30">
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-serif text-[#8B6F5C]">Shopping Cart</h1>
+      {% if cart.item_count > 0 %}
+        <span class="inline-block text-sm px-4 py-2 bg-[#F8C8DC]/20 text-[#8B6F5C] rounded-full font-semibold w-fit">
+          {{ cart.item_count }} item{{ cart.item_count | pluralize: '', 's' }}
+        </span>
+      {% endif %}
     </div>
 
     {% if cart.item_count > 0 %}
-        <form action="/cart/update" method="post" id="cart-form">
-            <div class="cart-content">
-                <div class="cart-items">
-                    {% for item in cart.items %}
-                        <div class="cart-item" data-line="{{ forloop.index }}">
-                            <a href="{{ item.url }}">
-                                <img src="{{ item.image | image_url: width: 240 }}" alt="{{ item.title }}" class="cart-item-image">
-                            </a>
-                            <div class="cart-item-details">
-                                <a href="{{ item.url }}" class="cart-item-title">{{ item.product.title }}</a>
-                                {% if item.variant.title != 'Default Title' %}
-                                    <p class="cart-item-variant">{{ item.variant.title }}</p>
-                                {% endif %}
-                                {% if item.properties.size > 0 %}
-                                    <div class="cart-item-properties">
-                                        {% for property in item.properties %}
-                                            <small>{{ property.first }}: {{ property.last }}</small>
-                                        {% endfor %}
-                                    </div>
-                                {% endif %}
-                                <p class="cart-item-price" data-price="{{ item.price }}">{{ item.price | money }}</p>
-                                <p class="cart-item-subtotal" data-line="{{ forloop.index }}">{{ item.line_price | money }}</p>
-                            </div>
-                            <div class="cart-item-controls">
-                                <div class="quantity-controls">
-                                    <button type="button" class="quantity-btn" data-action="decrease" data-line="{{ forloop.index }}" {% if item.quantity <= 1 %}disabled{% endif %}>−</button>
-                                    <input type="number" class="quantity-input" name="updates[{{ forloop.index }}]" value="{{ item.quantity }}" min="1" max="{{ item.variant.inventory_quantity | default: 999 }}" data-line="{{ forloop.index }}">
-                                    <button type="button" class="quantity-btn" data-action="increase" data-line="{{ forloop.index }}">+</button>
-                                </div>
-                                <button type="button" class="remove-item" data-line="{{ forloop.index }}">Remove</button>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+      <form action="/cart/update" method="post" id="cart-form">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <!-- Cart Items -->
+          <div class="lg:col-span-2 space-y-6">
+            {% for item in cart.items %}
+              <div class="flex gap-4 sm:gap-6 pb-6 border-b border-[#F5D5C8]/30 last:border-0" data-line="{{ forloop.index }}">
+                <!-- Product Image -->
+                <a href="{{ item.url }}" class="flex-shrink-0">
+                  <img 
+                    src="{{ item.image | image_url: width: 240 }}" 
+                    alt="{{ item.title }}" 
+                    class="w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg border border-[#F5D5C8]/30"
+                  >
+                </a>
 
-                <div class="cart-note-section">
-                    <h3>Add a note to your order (optional)</h3>
-                    <textarea id="cart-note" name="note" placeholder="Add special instructions, delivery notes, or any other information...">{{ cart.note }}</textarea>
-                </div>
-
-                <div class="cart-sidebar">
-
-                    <div class="cart-summary">
-                        <h3>Order Summary</h3>
-                        <div class="cart-summary-row">
-                            <span>Subtotal ({{ cart.item_count }} item{{ cart.item_count | pluralize: '', 's' }})</span>
-                            <span data-cart-subtotal data-initial="{{ cart.total_price }}">{{ cart.total_price | money }}</span>
-                        </div>
-                        {% if cart.total_discounts > 0 %}
-                            <div class="cart-summary-row">
-                                <span>Discount</span>
-                                <span>-{{ cart.total_discounts | money }}</span>
-                            </div>
-                        {% endif %}
-                        <div class="cart-summary-row total">
-                            <span>Total</span>
-                            <span data-cart-total data-initial="{{ cart.total_price }}">{{ cart.total_price | money }}</span>
-                        </div>
+                <!-- Product Details -->
+                <div class="flex-1 min-w-0">
+                  <a href="{{ item.url }}" class="text-lg sm:text-xl font-serif text-[#8B6F5C] hover:text-[#8B6F5C]/80 transition-colors block mb-2">
+                    {{ item.product.title }}
+                  </a>
+                  
+                  {% if item.variant.title != 'Default Title' %}
+                    <p class="text-sm text-[#A08577] mb-2">{{ item.variant.title }}</p>
+                  {% endif %}
+                  
+                  {% if item.properties.size > 0 %}
+                    <div class="text-xs text-[#A08577] mb-2 space-y-1">
+                      {% for property in item.properties %}
+                        <p>{{ property.first }}: {{ property.last }}</p>
+                      {% endfor %}
                     </div>
+                  {% endif %}
 
-                    <button type="submit" class="checkout-btn" formaction="/checkout">
-                        Proceed to Checkout
+                  <p class="text-base sm:text-lg font-semibold text-[#8B6F5C]" data-price="{{ item.price }}">
+                    {{ item.price | money }}
+                  </p>
+                </div>
+
+                <!-- Quantity & Remove -->
+                <div class="flex flex-col items-end justify-between gap-4">
+                  <!-- Quantity Controls -->
+                  <div class="flex items-center gap-2 border border-[#F5D5C8]/30 rounded-lg p-1">
+                    <button 
+                      type="button" 
+                      class="w-8 h-8 flex items-center justify-center text-[#8B6F5C] hover:bg-[#F8C8DC]/10 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed" 
+                      data-action="decrease" 
+                      data-line="{{ forloop.index }}" 
+                      {% if item.quantity <= 1 %}disabled{% endif %}
+                      title="Decrease quantity"
+                    >
+                      −
                     </button>
+                    <input 
+                      type="number" 
+                      class="w-12 text-center text-sm bg-transparent text-[#8B6F5C] border-0 focus:outline-none" 
+                      name="updates[{{ forloop.index }}]" 
+                      value="{{ item.quantity }}" 
+                      min="1" 
+                      max="{{ item.variant.inventory_quantity | default: 999 }}" 
+                      data-line="{{ forloop.index }}"
+                    >
+                    <button 
+                      type="button" 
+                      class="w-8 h-8 flex items-center justify-center text-[#8B6F5C] hover:bg-[#F8C8DC]/10 rounded transition-colors" 
+                      data-action="increase" 
+                      data-line="{{ forloop.index }}"
+                      title="Increase quantity"
+                    >
+                      +
+                    </button>
+                  </div>
 
-                    <div class="cart-actions">
-                        <button type="submit" class="update-cart-btn">Update Cart</button>
-                        <button type="submit" class="clear-cart-btn" formaction="/cart/clear">Clear Cart</button>
-                    </div>
+                  <!-- Line Total & Remove -->
+                  <div class="text-right">
+                    <p class="text-sm text-[#A08577] mb-2" data-line="{{ forloop.index }}">
+                      {{ item.line_price | money }}
+                    </p>
+                    <button 
+                      type="button" 
+                      class="text-xs text-[#F8C8DC] hover:text-[#8B6F5C] transition-colors underline" 
+                      data-line="{{ forloop.index }}"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
+              </div>
+            {% endfor %}
+
+            <!-- Add Note Section -->
+            <div class="bg-[#F8F9FA] border border-[#F5D5C8]/20 rounded-lg p-6">
+              <h3 class="text-lg font-semibold text-[#8B6F5C] mb-4">Add a note to your order (optional)</h3>
+              <textarea 
+                id="cart-note" 
+                name="note" 
+                placeholder="Add special instructions, delivery notes, or any other information..."
+                class="w-full min-h-24 px-4 py-3 border border-[#F5D5C8]/30 rounded-lg text-[#8B6F5C] placeholder-[#A08577] focus:outline-none focus:ring-2 focus:ring-[#F8C8DC] focus:border-transparent resize-vertical"
+              >{{ cart.note }}</textarea>
             </div>
-        </form>
-    {% else %}
-        <div class="cart-empty">
-            <h2>Your cart is empty</h2>
-            <p>Add some products to get started!</p>
-            <a href="/" class="continue-shopping-btn">Continue Shopping</a>
+          </div>
+
+          <!-- Cart Summary Sidebar -->
+          <div class="lg:col-span-1">
+            <div class="bg-[#F8F9FA] border border-[#F5D5C8]/20 rounded-lg p-6 sticky top-20">
+              <!-- Order Summary -->
+              <div class="mb-6">
+                <h3 class="text-xl font-semibold text-[#8B6F5C] mb-4">Order Summary</h3>
+                
+                <div class="space-y-3 mb-4 pb-4 border-b border-[#F5D5C8]/30">
+                  <div class="flex justify-between text-sm text-[#A08577]">
+                    <span>Subtotal ({{ cart.item_count }} item{{ cart.item_count | pluralize: '', 's' }})</span>
+                    <span data-cart-subtotal data-initial="{{ cart.total_price }}">{{ cart.total_price | money }}</span>
+                  </div>
+                  
+                  {% if cart.total_discounts > 0 %}
+                    <div class="flex justify-between text-sm text-[#F8C8DC] font-semibold">
+                      <span>Discount</span>
+                      <span>-{{ cart.total_discounts | money }}</span>
+                    </div>
+                  {% endif %}
+                </div>
+
+                <div class="flex justify-between text-lg font-serif text-[#8B6F5C] mb-6">
+                  <span>Total</span>
+                  <span data-cart-total data-initial="{{ cart.total_price }}">{{ cart.total_price | money }}</span>
+                </div>
+              </div>
+
+              <!-- Checkout Button -->
+              <button 
+                type="submit" 
+                class="w-full bg-[#F8C8DC] hover:bg-[#F5B5CE] text-white font-semibold py-3 px-4 rounded-full transition-colors mb-3"
+                formaction="/checkout"
+              >
+                Proceed to Checkout
+              </button>
+
+              <!-- Cart Actions -->
+              <div class="space-y-2">
+                <button 
+                  type="submit" 
+                  class="w-full border border-[#F5D5C8]/30 bg-white text-[#8B6F5C] font-semibold py-2 px-4 rounded-lg hover:bg-[#F8F9FA] transition-colors"
+                >
+                  Update Cart
+                </button>
+                <button 
+                  type="submit" 
+                  class="w-full border-2 border-red-400 bg-white text-red-500 font-semibold py-2 px-4 rounded-lg hover:bg-red-50 transition-colors"
+                  formaction="/cart/clear"
+                >
+                  Clear Cart
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
+      </form>
+    {% else %}
+      <div class="text-center py-16 sm:py-24">
+        <svg class="w-16 h-16 sm:w-20 sm:h-20 text-[#F5D5C8] mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+        </svg>
+        <h2 class="text-2xl sm:text-3xl font-serif text-[#8B6F5C] mb-3">Your cart is empty</h2>
+        <p class="text-[#A08577] text-base sm:text-lg mb-8">Add some products to get started!</p>
+        <a href="/" class="inline-block bg-[#F8C8DC] hover:bg-[#F5B5CE] text-white font-semibold py-3 px-8 rounded-full transition-colors">
+          Continue Shopping
+        </a>
+      </div>
     {% endif %}
-</div>
+  </div>
+</main>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Simple function to update all totals
-        function updateTotals() {
-            let total = 0;
-            let itemCount = 0;
+  document.addEventListener('DOMContentLoaded', function() {
+    function updateTotals() {
+      let total = 0;
+      let itemCount = 0;
 
-            // Calculate totals from current quantities
-            document.querySelectorAll('.cart-item').forEach(item => {
-                const quantityInput = item.querySelector('.quantity-input');
-                const priceElement = item.querySelector('.cart-item-price');
-                const subtotalElement = item.querySelector('.cart-item-subtotal');
+      document.querySelectorAll('[data-line]').forEach(item => {
+        const quantityInput = item.querySelector('.quantity-input');
+        const priceElement = item.querySelector('[data-price]');
+        const subtotalElement = item.querySelector('[data-line]');
 
-                if (quantityInput && priceElement && subtotalElement) {
-                    const quantity = parseInt(quantityInput.value) || 0;
-                    const price = parseInt(priceElement.dataset.price) || 0; // Price in cents
+        if (quantityInput && priceElement && subtotalElement && quantityInput.value) {
+          const quantity = parseInt(quantityInput.value) || 0;
+          const price = parseInt(priceElement.dataset.price) || 0;
 
-                    if (quantity > 0 && price > 0) {
-                        itemCount += quantity;
-                        const lineTotal = (price * quantity) / 100; // Convert cents to dollars
-                        subtotalElement.textContent = '$' + lineTotal.toFixed(2);
-                        total += lineTotal;
-                    } else {
-                        subtotalElement.textContent = '$0.00';
-                    }
-                }
-            });
+          if (quantity > 0 && price > 0) {
+            itemCount += quantity;
+            const lineTotal = (price * quantity) / 100;
+            subtotalElement.textContent = '$' + lineTotal.toFixed(2);
+            total += lineTotal;
+          } else {
+            subtotalElement.textContent = '$0.00';
+          }
+        }
+      });
 
-            // Update summary
-            const subtotalElement = document.querySelector('[data-cart-subtotal]');
-            const totalElement = document.querySelector('[data-cart-total]');
-            const itemCountElement = document.querySelector('.cart-count');
-            const summaryCountElement = document.querySelector('.cart-summary-row span:first-child');
+      const subtotalElement = document.querySelector('[data-cart-subtotal]');
+      const totalElement = document.querySelector('[data-cart-total]');
 
-            if (subtotalElement) subtotalElement.textContent = '$' + total.toFixed(2);
-            if (totalElement) totalElement.textContent = '$' + total.toFixed(2);
-            if (itemCountElement) {
-                itemCountElement.textContent = itemCount + ' item' + (itemCount !== 1 ? 's' : '');
-            }
-            if (summaryCountElement) {
-                summaryCountElement.innerHTML = 'Subtotal (' + itemCount + ' item' + (itemCount !== 1 ? 's' : '') + ')';
-            }
+      if (subtotalElement) subtotalElement.textContent = '$' + total.toFixed(2);
+      if (totalElement) totalElement.textContent = '$' + total.toFixed(2);
+    }
+
+    // Quantity buttons
+    document.querySelectorAll('.quantity-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const input = this.parentElement.querySelector('.quantity-input');
+        let quantity = parseInt(input.value) || 0;
+
+        if (this.dataset.action === 'increase') {
+          quantity++;
+        } else if (this.dataset.action === 'decrease' && quantity > 1) {
+          quantity--;
         }
 
-        // Handle quantity button clicks
-        document.querySelectorAll('.quantity-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const input = this.parentElement.querySelector('.quantity-input');
-                let quantity = parseInt(input.value) || 0;
+        input.value = quantity;
+        this.parentElement.querySelector('[data-action="decrease"]').disabled = quantity <= 1;
+        updateTotals();
+      });
+    });
 
-                if (this.dataset.action === 'increase') {
-                    quantity++;
-                } else if (this.dataset.action === 'decrease' && quantity > 1) {
-                    quantity--;
+    // Remove item buttons
+    document.querySelectorAll('[data-line] button[data-line]:not([data-action])').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.preventDefault();
+        this.closest('[data-line]').remove();
+        updateTotals();
+      });
+    });
+
+    updateTotals();
+  });
+</script>
                 }
 
                 input.value = quantity;

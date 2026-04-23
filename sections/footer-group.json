@@ -1,0 +1,24 @@
+{
+  "type": "footer",
+  "name": "Footer Group",
+  "sections": {
+    "footer": {
+      "type": "footer",
+      "name": "Footer",
+      "settings": {
+        "company_name": "Blossom Bloom Creation",
+        "company_description": "Creating beautiful personalized mugs and tumblers that bring joy and style to every moment. Custom designs made just for you.",
+        "service_1": "Custom Mugs",
+        "service_2": "Personalized Tumblers",
+        "service_3": "Bulk Orders",
+        "service_4": "Corporate Gifts",
+        "facebook_url": "",
+        "instagram_url": "",
+        "pinterest_url": ""
+      }
+    }
+  },
+  "order": [
+    "footer"
+  ]
+}
