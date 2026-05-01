@@ -2,25 +2,17 @@
   "type": "header",
   "name": "Header Group",
   "sections": {
-    "annoucement_bar_6kwnmA": {
-      "type": "annoucement-bar",
-      "name": "Announcement Bar",
-      "settings": {
-        "announcement_text": "Welcome to Blosson Bloom Store !",
-        "background_color": "#c25454",
-        "text_color": "#ffffff"
-      }
+    "menu_bar": {
+      "type": "menu-bar",
+      "settings": {}
     },
     "header": {
       "type": "header",
-      "settings": {
-        "collection": "",
-        "header": 4
-      }
+      "settings": {}
     }
   },
   "order": [
-    "annoucement_bar_6kwnmA",
+    "menu_bar",
     "header"
   ]
 }

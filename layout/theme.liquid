@@ -1,9 +1,13 @@
 <html>
-     {{' tailwind.output.css' | asset_url | stylesheet_tag }}
+    <link rel="shortcut icon" href="{{ 'favicon-32x32.png' | asset_url }}" type="image/png" />
+
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{ page_title }}</title>
         {{ content_for_header }}
-        <link rel="stylesheet" href="{{ 'theme.css' | asset_url }}" type="text/css" media="all">
+        {{'tailwind.css' | asset_url | stylesheet_tag }}
+        {{'application.js' | asset_url | script_tag }}
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     </head>
 
     <body>

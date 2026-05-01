@@ -1,160 +1,25 @@
-{% stylesheet %}
-.store-header {
-    width: 100%;
-    border-bottom: 1px solid #ececec;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    font-family: var(--font-sans);
-    min-height: 500px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 2rem;
-    -webkit-font-smoothing: antialiased;
-}
-
-.store-header__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    width: 100%;
-}
-
-.store-header__top {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 4rem;
-    flex-wrap: wrap;
-}
-
-.store-header__brand {
-    position: absolute;
-    left: 1.5rem;
-    flex: 1 1 auto;
-    min-width: 180px;
-}
-
-.store-header__brand-link {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-}
-
-
-.store-header__logo-text {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #111;
-    font-family: var(--font-sans);
-}
-
-.store-header__nav {
-    display: flex;
-    gap: 3rem;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-}
-
-.store-header__nav-link {
-    color: #8B6F5C;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: color 0.2s ease;
-    font-family: var(--font-sans);
-    letter-spacing: 1px;
-    white-space: nowrap;
-    text-transform: uppercase;
-}
-
-.store-header__nav-link:hover {
-    color: #6B5F4C;
-}
-
-.store-header__actions {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-}
-
-.store-heade8B6F5C;
-    text-decoration: none;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    transition: color 0.2s ease;
-}
-
-.store-header__action-link:hover {
-    color: #6B5F4Caction-link:hover {
-    color: #000;
-}
-
-.visually-hidden {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    border: 0;
-}
-{% endstylesheet %}
-
-<header class="store-header" style="background-image: url('{{ 'header-floral-background.jpg' | asset_url }}');">
-    <div class="store-header__container">
-        <div class="store-header__brand">
-            <a href="{{ shop.url }}" class="store-header__brand-link">
-            </a>
-        </div>
-
-        <div class="store-header__top">
-            <nav class="store-header__nav" aria-label="Primary navigation">
-                {% for link in linklists.main-menu.links %}
-                <a href="{{ link.url }}" class="store-header__nav-link">{{ link.title }}</a>
-                {% endfor %}
-            </nav>
-
-            <div class="store-header__actions">
-                <a href="/account" class="store-header__action-link">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
-                </svg>
-                </a>
-                <a href="/cart" class="store-header__action-link">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="9" cy="21" r="1"/>
-                <circle cx="20" cy="21" r="1"/>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
-                </svg>
-                </a>
-            </div>
-        </div>
-    </div>
+<header class="relative w-full h-80 overflow-hidden">
+  <div class="absolute inset-0">
+    {% if section.settings.background_image_header != blank %}
+    {{ section.settings.background_image_header | image_url: width: 2000 | image_tag: class: 'w-full h-full object-cover object-center', loading: 'lazy' }}
+    {% else %}
+    <img src="{{ 'header-floral-background.jpg' | asset_url }}" alt="Header background"
+      class="w-full h-full object-cover object-center">
+    {% endif %}
+  </div>
 </header>
-
 
 {% schema %}
 {
-    "name": "Header",
-    "settings": [
+  "name": "HeaderPagina",
+  "settings": [
         {
-            "type": "collection",
-            "id": "collection",
-            "label": "Collection"
-        },
-        {
-            "id": "header",
-            "label": "Number of products to show",
-            "type": "number",
-            "default": 4
+        "type": "image_picker",
+        "id": "background_image_header",
+        "label": "Background Image"
+        
         }
-
-    ]  
-
-}   
+  ]
+}
 {% endschema %}
+
