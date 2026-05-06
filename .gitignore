@@ -2,6 +2,7 @@
 node_modules/
 yarn.lock
 package-lock.json
+src/
 
 # Environment variables
 .env
@@ -38,3 +39,7 @@ temp/
 
 # Shopify specific
 config.yml
+
+# Alice informations
+alice.txt
+imagensBlossom/

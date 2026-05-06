@@ -1,0 +1,12 @@
+{
+    "name": "product",
+    "layout": "custom_theme",
+    "sections": {
+        "template": {
+            "type": "template-product"
+        }
+    },
+    "order": [
+        "template"
+    ]
+}

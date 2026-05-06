@@ -1,0 +1,58 @@
+<section class="relative z-10 px-4 py-6 sm:px-6 sm:py-8">
+  <div class="w-full">
+    <div class="relative bg-[#fff8f3]" data-bloom-carousel>
+      <div class="relative overflow-hidden">
+        <div class="relative z-0 flex" style="transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);" data-bloom-track>
+          <div class="w-full shrink-0" data-bloom-slide>
+            <img
+            src="{{ 'Image01c-opt-800.jpg' | asset_url }}"
+            alt="Blossom Bloom banner 1"
+            class="block w-full h-auto"
+            loading="eager"
+            >
+          </div>
+          <div class="w-full shrink-0" data-bloom-slide>
+            <img
+            src="{{ 'Image02c-opt-800.jpg' | asset_url }}"
+            alt="Blossom Bloom banner 2"
+            class="block w-full h-auto"
+            loading="lazy"
+            >
+          </div>
+          <div class="w-full shrink-0" data-bloom-slide>
+            <img
+            src="{{ 'Image01c-opt-800.jpg' | asset_url }}"
+            alt="Blossom Bloom banner 3"
+            class="block w-full h-auto"
+            loading="lazy"
+            >
+          </div>
+          <div class="w-full shrink-0" data-bloom-slide>
+            <img
+            src="{{ 'Image02c-opt-800.jpg' | asset_url }}"
+            alt="Blossom Bloom banner 4"
+            class="block w-full h-auto"
+            loading="lazy"
+            >
+          </div>
+        </div>
+
+        <div style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:30;" data-bloom-carousel-dots>
+          <button type="button" style="width:14px; height:14px; border-radius:50%; border:1px solid #fff; background:#2d6a4f; box-shadow:0 1px 3px rgba(0,0,0,0.4); padding:0; cursor:pointer;" data-bloom-dot aria-label="Slide 1"></button>
+          <button type="button" style="width:14px; height:14px; border-radius:50%; border:1px solid #fff; background:rgba(255,255,255,0.45); box-shadow:0 1px 3px rgba(0,0,0,0.4); padding:0; cursor:pointer;" data-bloom-dot aria-label="Slide 2"></button>
+          <button type="button" style="width:14px; height:14px; border-radius:50%; border:1px solid #fff; background:rgba(255,255,255,0.45); box-shadow:0 1px 3px rgba(0,0,0,0.4); padding:0; cursor:pointer;" data-bloom-dot aria-label="Slide 3"></button>
+          <button type="button" style="width:14px; height:14px; border-radius:50%; border:1px solid #fff; background:rgba(255,255,255,0.45); box-shadow:0 1px 3px rgba(0,0,0,0.4); padding:0; cursor:pointer;" data-bloom-dot aria-label="Slide 4"></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ 'carousel.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Carousel",
+  "settings": []
+}
+{% endschema %}

@@ -1,10 +1,18 @@
 {
     "sections": {
+        "header": {
+            "type": "header"
+        },
+        "carousel": {
+            "type": "carousel"
+        },
         "hero": {
             "type": "hero"
         }
     },
     "order": [
+        "header",
+        "carousel",
         "hero"
     ]
 }
