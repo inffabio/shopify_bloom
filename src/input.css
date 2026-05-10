@@ -4,3 +4,9 @@
 @source "../layout/**/*.liquid";
 @source "../templates/**/*.liquid";
 
+@layer utilities {
+	.font-menu-urban {
+		font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;
+	}
+}
+

@@ -1,12 +1,7 @@
 {% assign continue_shopping_url = routes.all_products_collection_url | default: routes.root_url %}
 
 <section class="relative isolate overflow-x-hidden">
-    <img
-        src="{{ 'bgBlossom.png' | asset_url }}"
-        alt=""
-        class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-95"
-    >
-    <div class="absolute inset-0 bg-white/8"></div>
+    <div class="absolute inset-0 bg-[#C7E8D4]"></div>
 
     <div class="relative mx-auto max-w-7xl px-4 pb-10 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36" data-cart-root data-money-format="{{ shop.money_format | escape }}">
         {% if cart.item_count > 0 %}
@@ -21,7 +16,7 @@
 
                 <a
                     href="{{ continue_shopping_url }}"
-                    class="inline-flex w-full items-center justify-center rounded-full border border-[#8B6F5C]/20 bg-white/80 px-6 py-3 text-sm font-semibold text-[#8B6F5C] transition hover:border-[#8B6F5C]/40 hover:bg-white md:w-auto"
+                    class="inline-flex w-full items-center justify-center rounded-full bg-[#cb6264] px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_-20px_rgba(139,111,92,0.6)] transition hover:bg-[#b55759] md:w-auto"
                 >
                     Return to shop
                 </a>
@@ -43,6 +38,8 @@
                                         <img
                                             src="{{ item.image | image_url: width: 320 }}"
                                             alt="{{ item.title | escape }}"
+                                            width="{{ item.image.width }}"
+                                            height="{{ item.image.height }}"
                                             class="h-24 w-24 object-cover sm:h-full sm:w-full"
                                         >
                                     {% else %}
@@ -146,7 +143,7 @@
 
                         <a
                             href="{{ continue_shopping_url }}"
-                            class="mt-4 inline-flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-[#8B6F5C] transition hover:bg-[#FFF7F3]"
+                            class="mt-4 inline-flex w-full items-center justify-center rounded-full bg-[#cb6264] px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_40px_-20px_rgba(139,111,92,0.6)] transition hover:bg-[#b55759]"
                         >
                             Return to shop
                         </a>

@@ -1,3 +1,4 @@
+{% unless template.name == 'index' or template.name == 'collection' or template.name == 'page' %}
 <style>
   .slideshow-img {
     position: absolute;
@@ -23,12 +24,13 @@
   }
 </style>
 
-<header class="relative w-full overflow-hidden bg-[#fff8f3] h-56 sm:h-72 md:h-80">
-  <img src="{{ 'Image01c-opt-800.jpg' | asset_url }}" alt="Blossom Bloom banner 1" class="slideshow-img" loading="eager">
-  <img src="{{ 'Image02c-opt-800.jpg' | asset_url }}" alt="Blossom Bloom banner 2" class="slideshow-img" loading="lazy">
-  <img src="{{ 'Image01c-opt-800.jpg' | asset_url }}" alt="Blossom Bloom banner 3" class="slideshow-img" loading="lazy">
-  <img src="{{ 'Image02c-opt-800.jpg' | asset_url }}" alt="Blossom Bloom banner 4" class="slideshow-img" loading="lazy">
+<header class="relative w-full overflow-hidden bg-transparent h-56 sm:h-72 md:h-80">
+  <img src="{{ 'Image01c-opt-800.jpg' | asset_url }}" alt="Blossom Bloom banner 1" width="800" height="533" class="slideshow-img" loading="eager">
+  <img src="{{ 'Image02c-opt-800.jpg' | asset_url }}" alt="Blossom Bloom banner 2" width="800" height="533" class="slideshow-img" loading="lazy">
+  <img src="{{ 'Image01c-opt-800.jpg' | asset_url }}" alt="Blossom Bloom banner 3" width="800" height="533" class="slideshow-img" loading="lazy">
+  <img src="{{ 'Image02c-opt-800.jpg' | asset_url }}" alt="Blossom Bloom banner 4" width="800" height="533" class="slideshow-img" loading="lazy">
 </header>
+{% endunless %}
 
 {% schema %}
 {

@@ -1,9 +1,9 @@
-<section class="relative z-10 px-4 py-10 sm:px-6 sm:py-12">
-    <div class="container mx-auto max-w-4xl text-center flex flex-col items-center">
-        <h2 class="text-3xl sm:text-4xl md:text-5xl font-serif text-[#8B6F5C] mb-4 sm:mb-6 text-balance">
+<section class="hero-section-{{ section.id }} relative z-10 px-4 py-10 sm:px-6 sm:py-12">
+        <div class="container mx-auto max-w-4xl text-center flex flex-col items-center border-t border-b border-black py-8">
+                <h2 class="hero-heading mb-4 font-serif text-balance sm:mb-6">
             {{ section.settings.heading }}
         </h2>
-        <p class="text-base sm:text-lg text-[#A08577] mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-4">
+                <p class="hero-description mb-6 max-w-2xl mx-auto leading-relaxed px-4 sm:mb-8">
             {{ section.settings.description }}
         </p>
         <a href="{{ section.settings.button_link }}" class="inline-block rounded-full bg-[#cb6264] hover:bg-[#b55759] text-white px-8 py-3 text-2xlshadow-lg transition-colors">
@@ -12,6 +12,29 @@
     </div>
 </section>
 
+{% style %}
+    .hero-section-{{ section.id }} .hero-heading {
+        color: {{ section.settings.heading_color }};
+        font-size: {{ section.settings.heading_size_mobile }}px;
+        line-height: 1.1;
+    }
+
+    .hero-section-{{ section.id }} .hero-description {
+        color: {{ section.settings.body_color }};
+        font-size: {{ section.settings.body_size_mobile }}px;
+    }
+
+    @media screen and (min-width: 640px) {
+        .hero-section-{{ section.id }} .hero-heading {
+            font-size: {{ section.settings.heading_size_desktop }}px;
+        }
+
+        .hero-section-{{ section.id }} .hero-description {
+            font-size: {{ section.settings.body_size_desktop }}px;
+        }
+    }
+{% endstyle %}
+
 {% schema %}
 {
     "name": "Hero Section",
@@ -19,14 +42,66 @@
         {
             "type": "text",
             "id": "heading",
-            "label": "Heading",
+            "label": "Hero title",
             "default": "Custom Mugs & Personalized Drinkware"
+        },
+        {
+            "type": "color",
+            "id": "heading_color",
+            "label": "Title color",
+            "default": "#2F3B63"
+        },
+        {
+            "type": "range",
+            "id": "heading_size_mobile",
+            "min": 24,
+            "max": 52,
+            "step": 2,
+            "unit": "px",
+            "label": "Title size mobile",
+            "default": 32
+        },
+        {
+            "type": "range",
+            "id": "heading_size_desktop",
+            "min": 32,
+            "max": 80,
+            "step": 2,
+            "unit": "px",
+            "label": "Title size desktop",
+            "default": 48
         },
         {
             "type": "textarea",
             "id": "description",
-            "label": "Description",
+            "label": "Body text",
             "default": "Transform your daily moments with beautifully personalized mugs and tumblers. From custom designs to elegant sets, we create drinkware that reflects your unique style and brings joy to every sip."
+        },
+        {
+            "type": "color",
+            "id": "body_color",
+            "label": "Body text color",
+            "default": "#4B567C"
+        },
+        {
+            "type": "range",
+            "id": "body_size_mobile",
+            "min": 14,
+            "max": 28,
+            "step": 1,
+            "unit": "px",
+            "label": "Body text size mobile",
+            "default": 16
+        },
+        {
+            "type": "range",
+            "id": "body_size_desktop",
+            "min": 16,
+            "max": 36,
+            "step": 1,
+            "unit": "px",
+            "label": "Body text size desktop",
+            "default": 18
         },
         {
             "type": "text",
@@ -35,10 +110,10 @@
             "default": "Shop Now"
         },
         {
-            "type": "text",
+            "type": "url",
             "id": "button_link",
             "label": "Button Link",
-            "default": "#products"
+            "default": "/collections/all"
         }
     ],
     "presets": [

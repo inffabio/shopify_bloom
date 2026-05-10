@@ -1,12 +1,19 @@
-<div class="relative z-20 border-b border-white/40 bg-linear-to-r from-blossom-50/85 to-blossom-100/85 shadow-[0_10px_30px_-18px_rgba(0,0,0,0.35)] backdrop-blur-md" x-data="{ mobileMenuOpen: false }">
+<div class="relative z-50 overflow-visible border-b border-white/40 shadow-[0_16px_34px_-20px_rgba(0,0,0,0.35)]" x-data="{ mobileMenuOpen: false }">
+    <div
+        class="pointer-events-none absolute inset-0 bg-center bg-cover"
+        style="background-image: url({{ 'bgBlossom.png' | asset_url }});"
+        aria-hidden="true"
+    ></div>
+
+    <div class="relative z-10">
     <div class="mx-auto px-4 sm:px-6">
         <div class="flex justify-between items-center py-1 md:justify-start md:space-x-10">
             <!-- STORE NAME / STORE LOGO -->
             <div class="flex justify-start lg:flex-1 truncate">
                 {% if section.settings.Logo %}
-                    <img src="{{ section.settings.Logo | img_url: '200x' }}" alt="Logo">
+                    <img src="{{ section.settings.Logo | image_url: width: 200 }}" alt="Logo" width="{{ section.settings.Logo.width }}" height="{{ section.settings.Logo.height }}">
                     {% else %}
-                       <img src="{{ 'logoblossom.png' | asset_url }}" alt="Logo" class="w-48 h-16 ">
+                       <img src="{{ 'logoblossom.png' | asset_url }}" alt="Logo" width="192" height="64" class="w-48 h-16 ">
                 {% endif %}
             </div>
 
@@ -20,12 +27,15 @@
                         aria-controls="mini-cart-drawer"
                     >
                         {% render 'icon-shopping-bag' %}
+                        {% if cart.items.size > 0 %}
                         <span
                             class="absolute -right-1 -top-1 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-[#8B6F5C] px-1 text-[11px] font-semibold leading-none text-white"
+                            style="background-color: #1F4D3A;"
                             data-mini-cart-count
                         >
-                            {{ cart.items.size }}
+                            {{ cart.items | size }}
                         </span>
+                        {% endif %}
                     </button>
 
                     <div class="pointer-events-none fixed inset-0 z-40 hidden bg-black/35 opacity-0 transition-opacity duration-300" data-mini-cart-overlay></div>
@@ -83,19 +93,19 @@
 
 
             <!-- NAVIGATION MENU -->
-            <nav class="hidden md:flex space-x-10">
+            <nav class="relative z-50 hidden md:flex space-x-10">
                 {% for link in linklists.main-menu.links %}
                 {% if link.links != blank %}
                 <div x-data="{ open: false }" class="relative">
 
                     <button x-on:click="open = !open" type="button"
-                        class="inline-flex items-center text-base  text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-bold tracking-wide whitespace-nowrap uppercase font-sans">
+                        class="font-menu-urban inline-flex items-center text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
                         {{ link.title }}
                         {% render 'icon-dropdown' %}
                     </button>
 
-                    <div x-show="open" @click.away="open = false"
-                        class="absolute z-20 mt-4 min-w-60 max-w-88 md:left-0 xl:left-auto xl:right-0"
+                    <div x-show="open" x-on:click.outside="open = false"
+                        class="absolute z-60 mt-4 min-w-60 max-w-88 md:left-0 xl:left-auto xl:right-0"
                         x-transition:enter="transition ease-out duration-150"
                         x-transition:enter-start="opacity-0 -translate-y-1"
                         x-transition:enter-end="opacity-100 translate-y-0"
@@ -103,11 +113,18 @@
                         x-transition:leave-start="opacity-100 translate-y-0"
                         x-transition:leave-end="opacity-0 -translate-y-1"
                     >
-                        <div class="overflow-hidden rounded-2xl bg-white shadow-[0_24px_60px_-30px_rgba(139,111,92,0.55)]">
-                            <div class="relative grid gap-3 bg-white px-4 py-4">
+                        <div class="relative overflow-hidden rounded-2xl shadow-[0_24px_60px_-30px_rgba(139,111,92,0.55)]">
+                            <!-- Background image layer -->
+                            <div
+                                class="pointer-events-none absolute inset-0 bg-center bg-cover"
+                                style="background-image: url({{ 'bgBlossom.png' | asset_url }});"
+                                aria-hidden="true"
+                            ></div>
+                            <!-- Content layer -->
+                            <div class="relative z-10 grid gap-3 px-4 py-4">
                                 {% for childLink in link.links %}
                                     <!-- CREATE THE SUBLINK -->
-                                    <a href="{{ childLink.url }}" class="rounded-xl px-3 py-2 text-[#8B6F5C] hover:bg-[#FFF7F3] hover:text-[#6B5F4C] transition-colors no-underline font-bold text-sm tracking-wide uppercase font-sans">
+                                    <a href="{{ childLink.url }}" class="font-menu-urban rounded-xl px-3 py-2 text-[#8B6F5C] hover:bg-[#FFF7F3] hover:text-[#6B5F4C] transition-colors no-underline font-semibold text-[0.82rem] tracking-[0.08em] uppercase">
                                         <div>
                                             <p class="text-base font-medium">
                                                 {{ childLink.title }}
@@ -122,7 +139,7 @@
 
                 {% else %}
                 <div class="relative">
-                    <a href="{{ link.url }}" class="text-base text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-bold tracking-wide whitespace-nowrap uppercase font-sans">
+                    <a href="{{ link.url }}" class="font-menu-urban text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
                         {{ link.title }}
                     </a>
                 </div>
@@ -141,12 +158,15 @@
                         aria-controls="mini-cart-panel"
                     >
                         {% render 'icon-shopping-bag' %}
+                        {% if cart.items.size > 0 %}
                         <span
                             class="absolute -right-2 -top-2 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-[#8B6F5C] px-1 text-[11px] font-semibold leading-none text-white"
+                            style="background-color: #1F4D3A;"
                             data-mini-cart-count
                         >
-                            {{ cart.items.size }}
+                            {{ cart.items | size }}
                         </span>
+                        {% endif %}
                     </button>
 
                     <div
@@ -187,8 +207,8 @@
                     </div>
                 </div>
 
-                <a class="text-base text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-bold tracking-wide whitespace-nowrap uppercase font-sans">Login</a>
-                <a class="text-base text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-bold tracking-wide whitespace-nowrap uppercase font-sans">Register</a>
+                <a class="font-menu-urban text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">Login</a>
+                <a class="font-menu-urban text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">Register</a>
             </div>
         </div>
     </div>
@@ -219,14 +239,14 @@
                         {% if link.links != blank %}
                             <div x-data="{ {{link_handle}}: false }" class="relative">
                                 <button x-on:click="{{link_handle}} = !{{link_handle}}" type="button"
-                                    class="text-base text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-bold tracking-wide whitespace-nowrap uppercase font-sans flex items-center justify-between w-full">
+                                    class="font-menu-urban text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase flex items-center justify-between w-full">
                                     <div>{{ link.title }}</div>
                                     {% render 'icon-dropdown' %}
                                 </button>
 
                                 <div x-show="{{link_handle}}" class="grid gap-y-7 py-3">
                                     {% for childlink in link.links %}
-                                        <a href="{{ childlink.url }}" class="p-3 hover:bg-gray-200 transition-colors no-underline font-bold tracking-wide whitespace-nowrap uppercase font-sans">
+                                        <a href="{{ childlink.url }}" class="font-menu-urban p-3 hover:bg-gray-200 transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
                                             <span class="ml-3  text-base font-medium text-[#8B6F5C]">{{ childlink.title }}</span>
                                         </a>
                                     {% endfor %}
@@ -234,7 +254,7 @@
                             </div>
                         {% else %}
                         <a href="{{ link.url }}"
-                            class="-m-3 p-3 flex items-center rounded-md text-[#8B6F5C] hover:text-[#6B5F4C] hover:bg-gray-200 transition-colors no-underline font-bold tracking-wide whitespace-nowrap uppercase font-sans">
+                            class="font-menu-urban -m-3 p-3 flex items-center rounded-md text-[#8B6F5C] hover:text-[#6B5F4C] hover:bg-gray-200 transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
                             {{ link.title }}
                         </a>
                         {% endif %}
@@ -244,8 +264,11 @@
             </div>
         </div>
     </div>
+    </div>
 </div>
 
+<script defer src="{{ 'alpinejs-3.14.9.min.js' | asset_url }}"></script>
+<script defer src="{{ 'jquery-4.0.0.min.js' | asset_url }}"></script>
 <script src="{{ 'mini-cart.js' | asset_url }}" defer="defer"></script>
 
 {% schema  %} 

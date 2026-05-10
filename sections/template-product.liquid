@@ -4,15 +4,17 @@
             <img
                 src="{{ product.featured_image | image_url: width: 900 }}"
                 alt="{{ product.title }}"
+                width="{{ product.featured_image.width }}"
+                height="{{ product.featured_image.height }}"
                 class="h-full w-full object-cover"
             >
         </div>
 
         <div class="flex flex-col justify-center">
-            <h1 class="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">{{ product.title }}</h1>
-            <p class="mt-4 text-2xl font-semibold text-zinc-700">{{ product.selected_or_first_available_variant.price | money }}</p>
+            <h1 class="text-3xl font-bold tracking-tight text-[#cb6264] sm:text-4xl">{{ product.title }}</h1>
+            <p class="mt-4 text-2xl font-semibold text-[#cb6264]">{{ product.selected_or_first_available_variant.price | money }}</p>
 
-            <div class="prose prose-zinc mt-6 max-w-none text-zinc-600">
+            <div class="prose prose-zinc mt-6 max-w-none text-zinc-600 prose-p:text-xl prose-p:leading-relaxed">
                 {{ product.description }}
             </div>
 
@@ -22,7 +24,7 @@
                 <button
                     type="submit"
                     name="add"
-                    class="inline-flex items-center justify-center rounded-lg bg-zinc-900 px-6 py-3 text-sm font-semibold text-white transition hover:bg-zinc-700 disabled:cursor-not-allowed disabled:bg-zinc-300"     
+                    class="inline-flex items-center justify-center rounded-lg bg-[#cb6264] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#b55759] disabled:cursor-not-allowed disabled:bg-zinc-300"     
                 >
                     {% if product.available %}
                         Add to cart

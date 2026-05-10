@@ -1,0 +1,12 @@
+{
+  "name": "about",
+  "layout": "custom_theme",
+  "sections": {
+    "template": {
+      "type": "template-about"
+    }
+  },
+  "order": [
+    "template"
+  ]
+}

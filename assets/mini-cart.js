@@ -98,7 +98,7 @@
         return;
       }
 
-      const lineItemCount = cart.items.length;
+      const lineItemCount = Array.isArray(cart.items) ? cart.items.length : 0;
 
       $count.text(lineItemCount);
       $subtotal.text(formatMoney(moneyFormat, cart.total_price));
@@ -191,7 +191,5 @@
         renderItems(cart);
       }
     });
-
-    loadCart();
   });
 })();

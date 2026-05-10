@@ -4,15 +4,42 @@
             "type": "header"
         },
         "carousel": {
-            "type": "carousel"
+            "type": "carousel",
+            "blocks": {
+                "slide_1": {
+                    "type": "slide",
+                    "settings": {
+                        "alt": "Blossom Bloom banner 1",
+                        "fallback_image": "Image01c-opt-800.jpg"
+                    }
+                },
+                "slide_2": {
+                    "type": "slide",
+                    "settings": {
+                        "alt": "Blossom Bloom banner 2",
+                        "fallback_image": "Image02c-opt-800.jpg"
+                    }
+                }
+            },
+            "block_order": ["slide_1", "slide_2"]
         },
         "hero": {
-            "type": "hero"
+            "type": "hero",
+            "settings": {
+                "button_link": "/collections/all"
+            }
+        },
+        "product_carousel": {
+            "type": "product-carousel",
+            "settings": {
+                "heading": "Featured products"
+            }
         }
     },
     "order": [
         "header",
         "carousel",
-        "hero"
+        "hero",
+        "product_carousel"
     ]
 }

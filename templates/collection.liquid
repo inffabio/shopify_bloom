@@ -10,7 +10,7 @@
           type="text"
           id="search-products"
           placeholder="Search products..."
-          class="w-full pl-10 sm:pl-12 pr-4 py-4 sm:py-6 rounded-full border border-[#F5D5C8] focus:outline-none focus:ring-2 focus:ring-[#F8C8DC] text-sm sm:text-lg"
+          class="w-full pl-10 sm:pl-12 pr-4 py-2 sm:py-3 rounded-full border-2 border-[#8B6F5C] focus:outline-none focus:ring-2 focus:ring-[#8B6F5C]/30 text-sm sm:text-lg"
         >
       </div>
     </div>
@@ -71,6 +71,8 @@
                   <img
                     src="{{ product.featured_image | image_url: width: 300 }}"
                     alt="{{ product.title }}"
+                    width="{{ product.featured_image.width }}"
+                    height="{{ product.featured_image.height }}"
                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   >
                 {% else %}

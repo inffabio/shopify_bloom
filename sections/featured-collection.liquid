@@ -33,46 +33,23 @@
 }
 {% endschema %}
 
-<h2>{{ section.settings.heading }}</h2>
-<div class="featured-collection">
+<h2 class="text-2xl font-serif font-semibold text-gray-900 text-center mb-6">{{ section.settings.heading }}</h2>
+<div class="px-16 py-16">
     
     {% if section.settings.collection != blank %}
         
-        <div class="products-grid">
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 mt-6">
             {% for product in section.settings.collection.products limit: section.settings.products_to_show %}
-                <div class="product-item">
-                    <a href="{{ product.url }}">
+                <div>
+                    <a href="{{ product.url }}" class="no-underline block">
                         {% if product.featured_image %}
-                            <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.featured_image.alt }}">
+                            <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.featured_image.alt }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" class="w-full aspect-square object-cover">
                         {% endif %}
-                        <h3>{{ product.title }}</h3>
-                        <p class="price">{{ product.price | money }}</p>
+                        <h3 class="mt-2 text-base font-medium text-gray-900">{{ product.title }}</h3>
+                        <p class="text-sm text-gray-600">{{ product.price | money }}</p>
                     </a>
                 </div>
             {% endfor %}
         </div>
     {% endif %}
 </div>
-
-<style>
-    .featured-collection {
-        padding: 4rem;
-    }
-    
-    .products-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-top: 1.5rem;
-    }
-    
-    .product-item a {
-        text-decoration: none;
-        color: inherit;
-    }
-    
-    .product-item img {
-        width: 100%;
-        object-fit: cover;
-    }
-</style>
