@@ -36,6 +36,8 @@ Thumbs.db
 tmp/
 temp/
 *.tmp
+tmp-*.html
+tmp-*.json
 
 # Shopify specific
 config.yml
