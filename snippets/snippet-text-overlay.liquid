@@ -1,0 +1,31 @@
+<div style="
+  position: absolute;
+  top: {{ text_block.settings.vertical_position }}px;
+  {% if text_block.settings.text_position == 'left' %}
+    left: {{ text_block.settings.margin }}px;
+    text-align: left;
+  {% elsif text_block.settings.text_position == 'right' %}
+    right: {{ text_block.settings.margin }}px;
+    text-align: right;
+  {% else %}
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  {% endif %}
+  z-index: 20;
+  width: {{ text_block.settings.text_width }}%;
+  pointer-events: none;
+" {{ text_block.shopify_attributes }}>
+  <div style="
+    font-family: 'Lilita One', cursive;
+    font-size: {{ text_block.settings.text_height }}px;
+    color: {{ text_block.settings.text_color }};
+    line-height: 1.2;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.4);
+    margin-top: {{ text_block.settings.margin_top }}px;
+    margin-left: {{ text_block.settings.margin_left }}px;
+    margin-right: {{ text_block.settings.margin_right }}px;
+  ">
+    {{ text_block.settings.overlay_text }}
+  </div>
+</div>

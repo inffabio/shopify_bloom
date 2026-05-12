@@ -1,5 +1,9 @@
 (function ($) {
   function initCarousel($carousel) {
+    if ($carousel.data('bloomCarouselReady') === true) {
+      return;
+    }
+
     var $track = $carousel.find('[data-bloom-track]');
     var $slides = $carousel.find('[data-bloom-slide]');
     var $dots = $carousel.find('[data-bloom-dot]');
@@ -7,6 +11,8 @@
     if ($track.length === 0 || $slides.length === 0 || $dots.length === 0) {
       return;
     }
+
+    $carousel.data('bloomCarouselReady', true);
 
     var totalSlides = $slides.length;
     var transitionMs = 500;

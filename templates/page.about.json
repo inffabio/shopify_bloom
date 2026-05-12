@@ -1,12 +1,16 @@
 {
-  "name": "about",
+  "name": "page-about",
   "layout": "custom_theme",
   "sections": {
+    "header": {
+      "type": "header"
+    },
     "template": {
-      "type": "template-about"
+      "type": "template-page-about"
     }
   },
   "order": [
+    "header",
     "template"
   ]
 }

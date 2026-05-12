@@ -1,0 +1,223 @@
+<section class="relative z-10 px-4 sm:px-6" style="padding-top: {{ section.settings.section_padding_top }}px; padding-bottom: {{ section.settings.section_padding_bottom }}px;">
+  <div class="mx-auto max-w-6xl">
+    <div style="
+      border-radius: {{ section.settings.card_radius }}px;
+      border: {{ section.settings.card_border_width }}px solid {{ section.settings.card_border_color }};
+      background-color: {{ section.settings.card_bg_color }};
+      box-shadow: 0 10px 30px rgba(30, 39, 71, 0.15), 0 25px 60px rgba(30, 39, 71, 0.1);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      overflow: hidden;
+    ">
+      <!-- Image Left Side -->
+      {% if section.settings.show_image %}
+        <div class="hidden md:flex items-center justify-center overflow-hidden" style="background-color: #F8F9FA;">
+          <img
+            src="{{ 'girlGlassCup.png' | asset_url }}"
+            alt="About page image"
+            class="w-full h-full object-cover"
+          >
+        </div>
+      {% endif %}
+
+      <!-- Content Right Side -->
+      <div style="padding: {{ section.settings.card_padding }}px;">
+        {% if section.settings.show_page_title %}
+          <h1 class="font-serif" style="
+            font-size: {{ section.settings.title_size }}px;
+            color: {{ section.settings.heading_color }};
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+          ">
+            {% if section.settings.custom_title != blank %}
+              {{ section.settings.custom_title }}
+            {% else %}
+              {{ page.title }}
+            {% endif %}
+          </h1>
+        {% endif %}
+
+        {% if section.settings.intro_text != blank %}
+          <div class="leading-relaxed mb-6" style="
+            font-size: {{ section.settings.content_font_size }}px;
+            color: {{ section.settings.text_color }};
+            font-weight: 500;
+          ">
+            {{ section.settings.intro_text }}
+          </div>
+        {% endif %}
+
+        <div class="leading-relaxed [&_h2]:mt-6 [&_h2]:mb-4 [&_h2]:font-serif [&_h2]:text-2xl [&_h3]:mt-5 [&_h3]:mb-3 [&_h3]:font-serif [&_h3]:text-lg [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:underline-offset-2 hover:[&_a]:underline" style="
+          font-size: {{ section.settings.content_font_size }}px;
+          color: {{ section.settings.text_color }};
+          line-height: 1.8;
+        ">
+          <div
+            class="page-about-content-rich"
+            style="
+              --page-about-heading-color: {{ section.settings.heading_color }};
+              --page-about-link-hover-color: {{ section.settings.link_hover_color }};
+            "
+          >
+            {{ page.content }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Template Page About",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Title Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_page_title",
+      "label": "Show page title",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "custom_title",
+      "label": "Custom title",
+      "info": "Leave blank to use the page title"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "label": "Title size",
+      "min": 24,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Image & Background"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show image on left side",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "richtext",
+      "id": "intro_text",
+      "label": "Intro text"
+    },
+    {
+      "type": "range",
+      "id": "content_font_size",
+      "label": "Content font size",
+      "min": 12,
+      "max": 24,
+      "step": 1,
+      "unit": "px",
+      "default": 16
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#4A4A4A"
+    },
+    {
+      "type": "color",
+      "id": "heading_color",
+      "label": "Heading color",
+      "default": "#1E2747"
+    },
+    {
+      "type": "color",
+      "id": "link_hover_color",
+      "label": "Link hover color",
+      "default": "#8B6F5C"
+    },
+    {
+      "type": "header",
+      "content": "Card Settings"
+    },
+    {
+      "type": "color",
+      "id": "card_bg_color",
+      "label": "Card background",
+      "default": "#FFFFFF"
+    },
+    {
+      "type": "color",
+      "id": "card_border_color",
+      "label": "Card border color",
+      "default": "#E0E0E0"
+    },
+    {
+      "type": "range",
+      "id": "card_border_width",
+      "label": "Card border width",
+      "min": 0,
+      "max": 4,
+      "step": 1,
+      "unit": "px",
+      "default": 1
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "label": "Card padding",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "card_radius",
+      "label": "Card radius",
+      "min": 0,
+      "max": 48,
+      "step": 2,
+      "unit": "px",
+      "default": 32
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "section_padding_top",
+      "label": "Section padding top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 50
+    },
+    {
+      "type": "range",
+      "id": "section_padding_bottom",
+      "label": "Section padding bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}

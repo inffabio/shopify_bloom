@@ -1,0 +1,7 @@
+<div style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:30;" data-bloom-carousel-dots>
+  {% for block in blocks %}
+    {% if block.type == 'slide' %}
+      <button type="button" style="width:14px; height:14px; border-radius:50%; border:1px solid #fff; background:{% if forloop.first %}#2d6a4f{% else %}rgba(255,255,255,0.45){% endif %}; box-shadow:0 1px 3px rgba(0,0,0,0.4); padding:0; cursor:pointer;" data-bloom-dot aria-label="Slide {{ forloop.index }}"></button>
+    {% endif %}
+  {% endfor %}
+</div>

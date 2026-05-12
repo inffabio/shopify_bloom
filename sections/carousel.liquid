@@ -1,43 +1,29 @@
 <section class="relative z-10 px-4 py-6 sm:px-6 sm:py-8">
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
   <div class="w-full">
     <div class="relative rounded-xl bg-white p-4 shadow-[0_18px_40px_-24px_rgba(95,81,73,0.35)]" data-bloom-carousel>
-      <div class="relative overflow-hidden rounded-lg">
-        <div class="relative z-0 flex" style="transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);" data-bloom-track>
+      <div class="rounded-lg" style="position: relative; overflow: visible;">
+        <div class="relative overflow-hidden rounded-lg">
+          <div class="relative z-0 flex" style="transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);" data-bloom-track>
+          {% assign slide_number = 0 %}
           {% for block in section.blocks %}
             {% if block.type == 'slide' %}
-              <div class="w-full shrink-0" data-bloom-slide {{ block.shopify_attributes }}>
-                {% if block.settings.image != blank %}
-                  <img
-                    src="{{ block.settings.image | image_url: width: 800 }}"
-                    alt="{{ block.settings.alt | escape }}"
-                    width="800"
-                    height="533"
-                    class="block w-full h-auto"
-                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                    {% if forloop.first %}fetchpriority="high"{% endif %}
-                  >
-                {% elsif block.settings.fallback_image != blank %}
-                  <img
-                    src="{{ block.settings.fallback_image | asset_url }}"
-                    alt="{{ block.settings.alt | escape }}"
-                    width="800"
-                    height="533"
-                    class="block w-full h-auto"
-                    loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                    {% if forloop.first %}fetchpriority="high"{% endif %}
-                  >
-                {% endif %}
+              {% assign slide_number = slide_number | plus: 1 %}
+              <div class="w-full shrink-0 relative" data-bloom-slide {{ block.shopify_attributes }}>
+                {% render 'snippet-carousel-slide-image', block: block, is_first: forloop.first %}
+
+                <!-- Text Overlays específicos deste slide -->
+                {% for text_block in section.blocks %}
+                  {% if text_block.type == 'text_overlay' and text_block.settings.overlay_text != blank and text_block.settings.target_slide == slide_number %}
+                    {% render 'snippet-text-overlay', text_block: text_block %}
+                  {% endif %}
+                {% endfor %}
               </div>
             {% endif %}
           {% endfor %}
         </div>
 
-        <div style="position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:10px; z-index:30;" data-bloom-carousel-dots>
-          {% for block in section.blocks %}
-            {% if block.type == 'slide' %}
-              <button type="button" style="width:14px; height:14px; border-radius:50%; border:1px solid #fff; background:{% if forloop.first %}#2d6a4f{% else %}rgba(255,255,255,0.45){% endif %}; box-shadow:0 1px 3px rgba(0,0,0,0.4); padding:0; cursor:pointer;" data-bloom-dot aria-label="Slide {{ forloop.index }}"></button>
-            {% endif %}
-          {% endfor %}
+        {% render 'snippet-carousel-dots', blocks: section.blocks %}
         </div>
       </div>
     </div>
@@ -53,7 +39,7 @@
   "blocks": [
     {
       "type": "slide",
-      "name": "Slide",
+      "name": "📸 Slide",
       "settings": [
         {
           "type": "image_picker",
@@ -73,9 +59,132 @@
           "default": "Carousel slide"
         }
       ]
+    },
+    {
+      "type": "text_overlay",
+      "name": "📝 Text Overlay",
+      "settings": [
+            {
+              "type": "text",
+              "id": "overlay_text",
+              "label": "Text content",
+              "placeholder": "Enter your text here"
+            },
+            {
+              "type": "range",
+              "id": "target_slide",
+              "label": "Target slide number",
+              "min": 1,
+              "max": 20,
+              "step": 1,
+              "default": 1,
+              "info": "Which slide number to display this overlay on (1 = first slide)"
+            },
+            {
+              "type": "select",
+              "id": "text_position",
+              "label": "Horizontal position",
+              "options": [
+                {
+                  "value": "left",
+                  "label": "Left"
+                },
+                {
+                  "value": "middle",
+                  "label": "Middle"
+                },
+                {
+                  "value": "right",
+                  "label": "Right"
+                }
+              ],
+              "default": "middle"
+            },
+            {
+              "type": "range",
+              "id": "vertical_position",
+              "label": "Distance from top",
+              "min": 0,
+              "max": 400,
+              "step": 10,
+              "unit": "px",
+              "default": 50,
+              "info": "0px = top of image, increase to move text down"
+            },
+            {
+              "type": "range",
+              "id": "margin",
+              "label": "Margin left/right",
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "unit": "px",
+              "default": 20,
+              "info": "Space from left or right edge"
+            },
+            {
+              "type": "range",
+              "id": "margin_left",
+              "label": "Margin left (text)",
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "unit": "px",
+              "default": 0,
+              "info": "Additional left margin on the text container"
+            },
+            {
+              "type": "range",
+              "id": "margin_right",
+              "label": "Margin right (text)",
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "unit": "px",
+              "default": 0,
+              "info": "Additional right margin on the text container"
+            },
+            {
+              "type": "range",
+              "id": "margin_top",
+              "label": "Margin top (vertical spacing)",
+              "min": 0,
+              "max": 100,
+              "step": 5,
+              "unit": "px",
+              "default": 0,
+              "info": "Extra space from the top position downward"
+            },
+            {
+              "type": "color",
+              "id": "text_color",
+              "label": "Text color",
+              "default": "#FFFFFF"
+            },
+            {
+              "type": "range",
+              "id": "text_height",
+              "label": "Font size",
+              "min": 20,
+              "max": 80,
+              "step": 2,
+              "unit": "px",
+              "default": 48
+            },
+            {
+              "type": "range",
+              "id": "text_width",
+              "label": "Text width",
+              "min": 30,
+              "max": 100,
+              "step": 5,
+              "unit": "%",
+              "default": 90
+            }
+          ]
     }
   ],
-  "max_blocks": 8,
+  "max_blocks": 30,
   "presets": [
     {
       "name": "Carousel",
