@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-13T00:00:00.000Z",
+  "title": "Design System: Blossom Bloom Creations",
+  "extensions": {
+    "colorMeta": {
+      "rose-coral": { "role": "primary", "displayName": "Rose Coral", "canonical": "#BC5254", "tonalRamp": ["#4A1E1F", "#6E2E2F", "#93403F", "#A24E50", "#BC5254", "#D98486", "#E8AEAF", "#F6DBDC"] },
+      "atelier-mocha": { "role": "secondary", "displayName": "Atelier Mocha", "canonical": "#8B6F5C", "tonalRamp": ["#2E241D", "#46372C", "#5F4B3C", "#78604D", "#8B6F5C", "#A48B7A", "#C0AC9E", "#E3D9D1"] },
+      "clay-taupe": { "role": "neutral", "displayName": "Clay Taupe", "canonical": "#A08577", "tonalRamp": ["#332821", "#4C3B31", "#665043", "#836A5A", "#A08577", "#B9A296", "#D2C3BB", "#EDE5E0"] },
+      "cocoa-ink": { "role": "neutral", "displayName": "Cocoa Ink", "canonical": "#5F5149", "tonalRamp": ["#221D1A", "#332C27", "#463C36", "#524740", "#5F5149", "#877468", "#B0A097", "#DAD3CE"] },
+      "espresso": { "role": "neutral", "displayName": "Espresso", "canonical": "#4E2E1F", "tonalRamp": ["#1E1109", "#2C1A10", "#3B2317", "#472A1B", "#4E2E1F", "#7A4C36", "#A87A64", "#D6B6A5"] },
+      "bg-home-rose": { "role": "neutral", "displayName": "Home Rose", "canonical": "#BFA6A0", "tonalRamp": ["#4A3A35", "#63504A", "#7D6760", "#9C8078", "#BFA6A0", "#D0BCB7", "#E1D3CF", "#F2EAE8"] },
+      "surface-cream": { "role": "neutral", "displayName": "Surface Cream", "canonical": "#F7F4EA", "tonalRamp": ["#3D3A2E", "#565343", "#726E5A", "#A6A188", "#CFCAB2", "#E4E0CE", "#F7F4EA", "#FCFBF5"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Hero and page titles; serif, editorial calm." },
+      "headline": { "displayName": "Headline", "purpose": "Section titles (testimonials, featured products, collection)." },
+      "body": { "displayName": "Body", "purpose": "Descriptions and prose; keep 65-75ch." },
+      "label": { "displayName": "Label / Nav", "purpose": "Navigation links and micro-labels; spaced uppercase Avenir." }
+    },
+    "shadows": [
+      { "name": "card-rest", "value": "0 1px 2px rgba(0,0,0,0.05)", "purpose": "Product cards at rest." },
+      { "name": "framed-image", "value": "0 18px 40px -24px rgba(95,81,73,0.35)", "purpose": "White-matted image frames." },
+      { "name": "floating-panel", "value": "0 32px 90px -30px rgba(15,23,42,0.28)", "purpose": "Product carousel shell." },
+      { "name": "overlay-drawer", "value": "0 28px 80px -40px rgba(139,111,92,0.6)", "purpose": "Mini-cart dropdown / drawer." },
+      { "name": "footer-lift", "value": "0 -18px 40px -28px rgba(0,0,0,0.18)", "purpose": "Upward shadow above the espresso footer." }
+    ],
+    "motion": [
+      { "name": "ease-out-soft", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Recommended easing for reveals and lifts." },
+      { "name": "transition-colors", "value": "150ms ease", "purpose": "Default for hover color/background changes." },
+      { "name": "drawer-slide", "value": "300ms ease-out", "purpose": "Mini-cart slide-in drawer." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "The single call to action: Shop Now, Add to Cart, Checkout.",
+      "html": "<button class=\"ds-btn-primary\">Shop Now</button>",
+      "css": ".ds-btn-primary { background: #BC5254; color: #fff; padding: 12px 32px; border: none; border-radius: 9999px; font-weight: 600; font-size: 1rem; cursor: pointer; transition: background-color .15s ease, transform .2s cubic-bezier(0.22,1,0.36,1); } .ds-btn-primary:hover { background: #A24E50; } .ds-btn-primary:focus-visible { outline: 2px solid #A24E50; outline-offset: 2px; } .ds-btn-primary:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Ghost action such as View cart; white fill with mocha hairline.",
+      "html": "<button class=\"ds-btn-secondary\">View cart</button>",
+      "css": ".ds-btn-secondary { background: #fff; color: #8B6F5C; padding: 8px 16px; border: 1px solid rgba(139,111,92,.2); border-radius: 9999px; font-weight: 600; font-size: .875rem; cursor: pointer; transition: background-color .15s ease; } .ds-btn-secondary:hover { background: #FDF6F1; } .ds-btn-secondary:focus-visible { outline: 2px solid #8B6F5C; outline-offset: 2px; }"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "card-product",
+      "description": "Catalog product tile: square image, serif title, coral-adjacent price.",
+      "html": "<a class=\"ds-card-product\" href=\"#\"><div class=\"ds-card-product__media\"></div><div class=\"ds-card-product__body\"><h3 class=\"ds-card-product__title\">Meadow Bloom Mug</h3><p class=\"ds-card-product__desc\">Hand-finished floral personalization.</p><p class=\"ds-card-product__price\">$24.00</p></div></a>",
+      "css": ".ds-card-product { display: flex; flex-direction: column; background: #fff; border: 1px solid rgba(245,213,200,.3); border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); overflow: hidden; text-decoration: none; transition: box-shadow .3s ease, transform .3s cubic-bezier(0.22,1,0.36,1); } .ds-card-product:hover { box-shadow: 0 18px 40px -24px rgba(95,81,73,0.35); transform: translateY(-2px); } .ds-card-product__media { aspect-ratio: 1/1; background: #F8F9FA; } .ds-card-product__body { padding: 16px; } .ds-card-product__title { font-family: ui-serif, Georgia, serif; color: #8B6F5C; font-size: 1.125rem; margin: 0 0 8px; } .ds-card-product__desc { color: #A08577; font-size: .8125rem; margin: 0 0 12px; } .ds-card-product__price { color: #8B6F5C; font-weight: 600; font-size: 1.25rem; margin: 0; }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "nav-link",
+      "description": "Primary navigation link: spaced uppercase Avenir in mocha.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">Shop</a>",
+      "css": ".ds-nav-link { font-family: 'Avenir Next', Avenir, 'Helvetica Neue', Arial, sans-serif; text-transform: uppercase; letter-spacing: .08em; font-weight: 600; font-size: .95rem; color: #8B6F5C; text-decoration: none; transition: color .15s ease; } .ds-nav-link:hover { color: #6B5F4C; } .ds-nav-link:focus-visible { outline: 2px solid #8B6F5C; outline-offset: 4px; }"
+    },
+    {
+      "name": "Testimonial Card",
+      "kind": "card",
+      "refersTo": "card-testimonial",
+      "description": "Frosted quote card with soft-pink stars and initials avatar.",
+      "html": "<figure class=\"ds-testimonial\"><div class=\"ds-testimonial__stars\"><svg viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"#F8C8DC\"><path d=\"M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17.8 5.9 20.4l1.5-6.8L2.2 9l6.9-.7z\"/></svg></div><blockquote class=\"ds-testimonial__quote\">The mug I ordered was even lovelier in person, my sister adored it.</blockquote><figcaption class=\"ds-testimonial__by\"><span class=\"ds-testimonial__avatar\">AL</span><span class=\"ds-testimonial__name\">Amelia L.</span></figcaption></figure>",
+      "css": ".ds-testimonial { margin: 0; padding: 24px; background: rgba(255,255,255,.6); backdrop-filter: blur(4px); border: 1px solid rgba(245,213,200,.3); border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); text-align: center; } .ds-testimonial__stars { display: flex; justify-content: center; gap: 2px; margin-bottom: 12px; } .ds-testimonial__quote { color: #A08577; line-height: 1.6; margin: 0 0 16px; } .ds-testimonial__by { display: flex; align-items: center; justify-content: center; gap: 8px; } .ds-testimonial__avatar { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 9999px; background: rgba(248,200,220,.2); color: #8B6F5C; font-weight: 600; font-size: .875rem; } .ds-testimonial__name { color: #8B6F5C; font-weight: 600; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Blooming Atelier",
+    "overview": "Blossom Bloom is a small maker's studio rendered on screen: taupe-and-rose ink laid over soft, bloom-tinted rooms, everything touched by diffuse light and finished by hand. The mood is calm, elegant, and heartfelt, the feeling of choosing a gift you know will be treasured. Warmth is carried by color, typography, and generous air, never by volume. The system rests on a signature per-page pastel background paired with a constant warm-neutral ink and a single rose-coral action color, so the store reads as connected, sunlit rooms rather than different websites.",
+    "keyCharacteristics": [
+      "Warm taupe-and-rose neutrals over soft pastel, bloom-tinted page backgrounds.",
+      "A single rose-coral accent reserved for actions and prices.",
+      "Serif for editorial calm; spaced uppercase sans for navigation.",
+      "Soft, diffuse, brown-tinted shadows; lifted but never hard.",
+      "Boutique curation over uniform catalog grids."
+    ],
+    "rules": [
+      { "name": "The One Accent Rule", "body": "Rose Coral (#BC5254) means act. It is for primary buttons, prices, and their hovers, nothing else. Its rarity is the point.", "section": "colors" },
+      { "name": "The Room-Per-Page Rule", "body": "Each template owns one pastel background; the mocha ink and coral accent never rotate, so pages feel like connected rooms.", "section": "colors" },
+      { "name": "The Serif-Heads Rule", "body": "All headings are serif; navigation and micro-labels are the spaced uppercase Avenir sans. Never swap them.", "section": "typography" },
+      { "name": "The Warm-Shadow Rule", "body": "Shadows are tinted with the brand brown, never pure gray-black, and always large-blur and low-opacity. A tight dark gray shadow is prohibited.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do reserve Rose Coral (#BC5254) for actions and prices only.",
+      "Do keep the per-page pastel background system and hold the mocha ink + coral accent constant.",
+      "Do set headings in the serif and navigation/labels in the spaced uppercase Avenir sans.",
+      "Do use large-blur, low-opacity, brown-tinted shadows for a soft, lifted feel.",
+      "Do verify body text contrast (Clay Taupe #A08577, Cocoa Ink #5F5149) clears 4.5:1; darken toward mocha if borderline.",
+      "Do add a visible :focus-visible state to every button and link."
+    ],
+    "donts": [
+      "Don't be bargain- or discount-driven: no clearance banners, countdown timers, or cluttered promos.",
+      "Don't look corporate or mass-produced, like a generic print-on-demand supplier.",
+      "Don't drift cold or tech-minimal: no sterile all-gray SaaS surfaces.",
+      "Don't ship the anonymous default Shopify template look.",
+      "Don't use tight, dark, gray-black shadows.",
+      "Don't tint headings, borders, or backgrounds with the coral accent."
+    ]
+  }
+}

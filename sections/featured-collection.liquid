@@ -33,7 +33,7 @@
 }
 {% endschema %}
 
-<h2 class="text-2xl font-serif font-semibold text-gray-900 text-center mb-6">{{ section.settings.heading }}</h2>
+<h2 class="text-2xl font-serif font-semibold text-atelier-mocha text-center mb-6">{{ section.settings.heading }}</h2>
 <div class="px-16 py-16">
     
     {% if section.settings.collection != blank %}
@@ -43,10 +43,10 @@
                 <div>
                     <a href="{{ product.url }}" class="no-underline block">
                         {% if product.featured_image %}
-                            <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.featured_image.alt }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" class="w-full aspect-square object-cover">
+                            <img src="{{ product.featured_image | image_url: width: 300 }}" alt="{{ product.featured_image.alt | escape }}" width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}" class="w-full aspect-square object-cover rounded-lg" loading="lazy">
                         {% endif %}
-                        <h3 class="mt-2 text-base font-medium text-gray-900">{{ product.title }}</h3>
-                        <p class="text-sm text-gray-600">{{ product.price | money }}</p>
+                        <h3 class="mt-2 text-base font-medium text-atelier-mocha">{{ product.title }}</h3>
+                        <p class="text-sm text-mocha-dark">{{ product.price | money }}</p>
                     </a>
                 </div>
             {% endfor %}

@@ -1,30 +1,55 @@
 <section class="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-12">
         <div class="overflow-hidden rounded-2xl border border-zinc-200 bg-white shadow-sm">
-            <img
-                src="{{ product.featured_image | image_url: width: 900 }}"
-                alt="{{ product.title }}"
-                width="{{ product.featured_image.width }}"
-                height="{{ product.featured_image.height }}"
-                class="h-full w-full object-cover"
-            >
+            {% if product.featured_image %}
+                <img
+                    src="{{ product.featured_image | image_url: width: 900 }}"
+                    alt="{{ product.title | escape }}"
+                    width="{{ product.featured_image.width }}"
+                    height="{{ product.featured_image.height }}"
+                    class="h-full w-full object-cover"
+                >
+            {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'h-full w-full object-cover text-blush-peach' }}
+            {% endif %}
         </div>
 
         <div class="flex flex-col justify-center">
-            <h1 class="text-3xl font-bold tracking-tight text-[#cb6264] sm:text-4xl">{{ product.title }}</h1>
-            <p class="mt-4 text-2xl font-semibold text-[#cb6264]">{{ product.selected_or_first_available_variant.price | money }}</p>
+            <h1 class="text-3xl font-bold tracking-tight text-rose-coral sm:text-4xl">{{ product.title }}</h1>
+            <p class="mt-4 text-2xl font-semibold text-rose-coral" data-product-price>{{ product.selected_or_first_available_variant.price | money }}</p>
 
-            <div class="prose prose-zinc mt-6 max-w-none text-zinc-600 prose-p:text-xl prose-p:leading-relaxed">
+            <div class="prose mt-6 max-w-none text-cocoa-ink prose-p:text-xl prose-p:leading-relaxed">
                 {{ product.description }}
             </div>
 
-           
-            <form action={{ routes.cart_add_url }} method="post" enctype="multipart/form-data" id="AddToCartForm" class="mt-8 space-y-4">
-                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+            <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" id="AddToCartForm" class="mt-8 space-y-4">
+                {% unless product.has_only_default_variant %}
+                    <div class="space-y-2">
+                        <label for="product-variant-{{ product.id }}" class="block text-sm font-semibold text-cocoa-ink">Choose an option</label>
+                        <select
+                            id="product-variant-{{ product.id }}"
+                            name="id"
+                            class="w-full rounded-lg border border-atelier-mocha/30 bg-white px-4 py-3 text-sm text-cocoa-ink transition focus:border-atelier-mocha"
+                        >
+                            {% for variant in product.variants %}
+                                <option
+                                    value="{{ variant.id }}"
+                                    {% if variant.id == product.selected_or_first_available_variant.id %}selected{% endif %}
+                                    {% unless variant.available %}disabled{% endunless %}
+                                >
+                                    {{ variant.title }} &middot; {{ variant.price | money }}{% unless variant.available %} &mdash; Sold out{% endunless %}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                {% else %}
+                    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                {% endunless %}
                 <button
                     type="submit"
                     name="add"
-                    class="inline-flex items-center justify-center rounded-lg bg-[#cb6264] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#b55759] disabled:cursor-not-allowed disabled:bg-zinc-300"     
+                    {% unless product.available %}disabled{% endunless %}
+                    class="inline-flex items-center justify-center rounded-lg bg-rose-coral px-6 py-3 text-sm font-semibold text-white transition hover:bg-rose-coral-hover disabled:cursor-not-allowed disabled:bg-zinc-300"
                 >
                     {% if product.available %}
                         Add to cart

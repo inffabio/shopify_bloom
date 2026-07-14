@@ -3,8 +3,8 @@
     src="{{ block.settings.image | image_url: width: 800 }}"
     alt="{{ block.settings.alt | escape }}"
     width="800"
-    height="533"
-    class="block w-full h-auto"
+    height="500"
+    class="block w-full h-full object-cover"
     loading="{% if is_first %}eager{% else %}lazy{% endif %}"
     {% if is_first %}fetchpriority="high"{% endif %}
   >
@@ -13,8 +13,8 @@
     src="{{ block.settings.fallback_image | asset_url }}"
     alt="{{ block.settings.alt | escape }}"
     width="800"
-    height="533"
-    class="block w-full h-auto"
+    height="500"
+    class="block w-full h-full object-cover"
     loading="{% if is_first %}eager{% else %}lazy{% endif %}"
     {% if is_first %}fetchpriority="high"{% endif %}
   >

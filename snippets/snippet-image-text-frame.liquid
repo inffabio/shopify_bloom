@@ -1,0 +1,27 @@
+{% comment %} snippet-image-text-frame.liquid — extracted from image-text.liquid {% endcomment %}
+
+<div class="rounded-xl bg-white p-3 shadow-[0_18px_40px_-24px_rgba(95,81,73,0.35)]" style="
+  max-width: {{ section.settings.image_max_width | plus: 36 }}px;
+  width: 100%;
+">
+  <div class="overflow-hidden shadow-[0_16px_32px_-16px_rgba(95,81,73,0.35)]" style="
+    border-radius: {{ section.settings.image_radius }}px;
+    aspect-ratio: {{ section.settings.image_aspect_ratio }};
+    width: 100%;
+  ">
+    {% if image_block.settings.image != blank %}
+      <img
+        src="{{ image_block.settings.image | image_url: width: 600 }}"
+        srcset="{{ image_block.settings.image | image_url: width: 400 }} 400w, {{ image_block.settings.image | image_url: width: 600 }} 600w"
+        sizes="(max-width: 768px) 100vw, 50vw"
+        alt="{{ image_block.settings.image.alt | escape }}"
+        width="{{ image_block.settings.image.width }}"
+        height="{{ image_block.settings.image.height }}"
+        class="w-full h-full object-cover"
+        loading="lazy"
+      >
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover text-blush-peach' }}
+    {% endif %}
+  </div>
+</div>

@@ -7,7 +7,7 @@
   <div class="container mx-auto max-w-4xl">
     <div class="rounded-3xl p-5 shadow-[0_32px_90px_-30px_rgba(15,23,42,0.28)] sm:p-6" style="background-color: #F7F4EA;" data-product-carousel>
       <div class="mb-8 sm:mb-10 text-center">
-        <h2 class="text-3xl sm:text-4xl font-serif text-[#8B6F5C]">{{ section.settings.heading }}</h2>
+        <h2 class="text-3xl sm:text-4xl font-serif text-atelier-mocha">{{ section.settings.heading }}</h2>
       </div>
 
       {% if selected_collection != blank and selected_collection.products_count > 0 %}
@@ -19,7 +19,7 @@
 
               {% capture page_html %}
                 {% for product in selected_collection.products limit: 3 offset: page_offset %}
-                  <a href="{{ product.url }}" class="group overflow-hidden bg-white border border-[#F5D5C8]/30 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col rounded-lg h-full cursor-pointer" style="width: 100%; min-width: 0;">
+                  <a href="{{ product.url }}" class="group overflow-hidden bg-white border border-blush-peach/30 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col rounded-lg h-full cursor-pointer" style="width: 100%; min-width: 0;">
                       <div class="aspect-square relative overflow-hidden bg-[#F8F9FA]">
                         {% if product.featured_image %}
                           <img
@@ -32,7 +32,7 @@
                           >
                         {% else %}
                           <div class="w-full h-full flex items-center justify-center">
-                            <svg class="w-12 h-12 text-[#F5D5C8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <svg class="w-12 h-12 text-blush-peach" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                             </svg>
                           </div>
@@ -40,17 +40,17 @@
                       </div>
 
                       <div class="p-3 sm:p-4 flex-1 flex flex-col">
-                        <h3 class="font-serif text-[#8B6F5C] text-base sm:text-lg mb-2 line-clamp-2">
+                        <h3 class="font-serif text-atelier-mocha text-base sm:text-lg mb-2 line-clamp-2">
                           {{ product.title }}
                         </h3>
 
                         {% if product.description %}
-                          <p class="text-[#A08577] text-xs sm:text-sm mb-3 line-clamp-2 flex-1">
+                          <p class="text-atelier-mocha text-xs sm:text-sm mb-3 line-clamp-2 flex-1">
                             {{ product.description | strip_html }}
                           </p>
                         {% endif %}
 
-                        <p class="text-[#8B6F5C] font-semibold text-lg sm:text-xl mb-3 sm:mb-4">
+                        <p class="text-atelier-mocha font-semibold text-lg sm:text-xl mb-3 sm:mb-4">
                           {{ product.price | money }}
                         </p>
                       </div>
@@ -82,17 +82,16 @@
               {% endif %}
               <button
                 type="button"
-                class="h-2.5 w-2.5 rounded-full"
-                style="background-color: {% if is_first %}#1F4D3A{% else %}#A8C9C7{% endif %};"
+                class="w-11 h-11 inline-flex items-center justify-center rounded-full transition-colors"
                 data-product-carousel-dot
                 aria-label="Go to products page {{ forloop.index }}"
                 aria-pressed="{% if is_first %}true{% else %}false{% endif %}"
-              ></button>
+              ><span class="block h-3 w-3 rounded-full" style="background-color: {% if is_first %}var(--color-forest-accent){% else %}#A8C9C7{% endif %};"></span></button>
             {% endfor %}
           </div>
         {% endif %}
       {% else %}
-        <div class="rounded-2xl border border-dashed border-[#8B6F5C]/25 bg-white p-8 text-center text-sm text-[#8B6F5C]/70">
+        <div class="rounded-2xl border border-dashed border-atelier-mocha/25 bg-white p-8 text-center text-sm text-mocha-dark">
           No products available yet.
         </div>
       {% endif %}

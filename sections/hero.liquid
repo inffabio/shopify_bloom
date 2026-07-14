@@ -1,18 +1,25 @@
 <section class="hero-section-{{ section.id }} relative z-10 px-4 py-10 sm:px-6 sm:py-12">
-        <div class="container mx-auto max-w-4xl text-center flex flex-col items-center border-t border-b border-black py-8">
+        <div class="hero-border container mx-auto max-w-4xl text-center flex flex-col items-center border-t border-b py-10 sm:py-14">
                 <h2 class="hero-heading mb-4 font-serif text-balance sm:mb-6">
             {{ section.settings.heading }}
         </h2>
                 <p class="hero-description mb-6 max-w-2xl mx-auto leading-relaxed px-4 sm:mb-8">
             {{ section.settings.description }}
         </p>
-        <a href="{{ section.settings.button_link }}" class="inline-block rounded-full bg-[#cb6264] hover:bg-[#b55759] text-white px-8 py-3 text-2xlshadow-lg transition-colors">
+        <a href="{{ section.settings.button_link }}" class="inline-flex rounded-full bg-wine hover:bg-wine-hover text-white px-10 py-3.5 text-lg font-medium shadow-xl transition-all duration-300 hover:-translate-y-px">
             {{ section.settings.button_text }}
         </a>
     </div>
 </section>
 
-{% style %}
+{% stylesheet %}
+    .hero-section-{{ section.id }} .hero-border {
+        border-top-width: {{ section.settings.border_thickness }}px;
+        border-bottom-width: {{ section.settings.border_thickness }}px;
+        border-top-color: color-mix(in srgb, {{ section.settings.border_color }} {{ section.settings.border_opacity }}%, transparent);
+        border-bottom-color: color-mix(in srgb, {{ section.settings.border_color }} {{ section.settings.border_opacity }}%, transparent);
+    }
+
     .hero-section-{{ section.id }} .hero-heading {
         color: {{ section.settings.heading_color }};
         font-size: {{ section.settings.heading_size_mobile }}px;
@@ -33,7 +40,7 @@
             font-size: {{ section.settings.body_size_desktop }}px;
         }
     }
-{% endstyle %}
+{% endstylesheet %}
 
 {% schema %}
 {
@@ -49,7 +56,7 @@
             "type": "color",
             "id": "heading_color",
             "label": "Title color",
-            "default": "#2F3B63"
+            "default": "#5F5149"
         },
         {
             "type": "range",
@@ -72,6 +79,32 @@
             "default": 48
         },
         {
+            "type": "range",
+            "id": "border_thickness",
+            "min": 1,
+            "max": 5,
+            "step": 1,
+            "unit": "px",
+            "label": "Border thickness",
+            "default": 3
+        },
+        {
+            "type": "color",
+            "id": "border_color",
+            "label": "Border color",
+            "default": "#8B6F5C"
+        },
+        {
+            "type": "range",
+            "id": "border_opacity",
+            "min": 5,
+            "max": 100,
+            "step": 5,
+            "unit": "%",
+            "label": "Border opacity",
+            "default": 15
+        },
+        {
             "type": "textarea",
             "id": "description",
             "label": "Body text",
@@ -81,7 +114,7 @@
             "type": "color",
             "id": "body_color",
             "label": "Body text color",
-            "default": "#4B567C"
+            "default": "#4D3D32"
         },
         {
             "type": "range",

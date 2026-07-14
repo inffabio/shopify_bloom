@@ -1,45 +1,72 @@
 {
-    "sections": {
-        "header": {
-            "type": "header"
-        },
-        "carousel": {
-            "type": "carousel",
-            "blocks": {
-                "slide_1": {
-                    "type": "slide",
-                    "settings": {
-                        "alt": "Blossom Bloom banner 1",
-                        "fallback_image": "Image01c-opt-800.jpg"
-                    }
-                },
-                "slide_2": {
-                    "type": "slide",
-                    "settings": {
-                        "alt": "Blossom Bloom banner 2",
-                        "fallback_image": "Image02c-opt-800.jpg"
-                    }
-                }
-            },
-            "block_order": ["slide_1", "slide_2"]
-        },
-        "hero": {
-            "type": "hero",
-            "settings": {
-                "button_link": "/collections/all"
-            }
-        },
-        "product_carousel": {
-            "type": "product-carousel",
-            "settings": {
-                "heading": "Featured products"
-            }
-        }
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {}
     },
-    "order": [
-        "header",
-        "carousel",
-        "hero",
-        "product_carousel"
-    ]
+    "carousel": {
+      "type": "carousel",
+      "blocks": {
+        "slide_1": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/BlossonFotoComCopos800x226.png",
+            "fallback_image": "Image01c-opt-800.jpg",
+            "alt": "Blossom Bloom banner 1"
+          }
+        },
+        "slide_2": {
+          "type": "slide",
+          "settings": {
+            "fallback_image": "Image02c-opt-800.jpg",
+            "alt": "Blossom Bloom banner 2"
+          }
+        }
+      },
+      "block_order": [
+        "slide_1",
+        "slide_2"
+      ],
+      "settings": {}
+    },
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "heading": "Custom Mugs & Personalized Drinkware",
+        "heading_color": "#5F5149",
+        "heading_size_mobile": 32,
+        "heading_size_desktop": 48,
+        "description": "Transform your daily moments with beautifully personalized mugs and tumblers. From custom designs to elegant sets, we create drinkware that reflects your unique style and brings joy to every sip.",
+        "body_color": "#4D3D32",
+        "body_size_mobile": 16,
+        "body_size_desktop": 18,
+        "button_text": "Shop Now",
+        "button_link": "/collections/all"
+      }
+    },
+    "image_text": {
+      "type": "image-text",
+      "blocks": {
+        "image_block_1": {
+          "type": "image_block",
+          "settings": {
+            "position": "left"
+          }
+        }
+      },
+      "block_order": [
+        "image_block_1"
+      ],
+      "settings": {
+        "heading": "Made with care, for someone you love",
+        "subtitle": "Create a one-of-a-kind gift that speaks from the heart. From custom names to special dates, we'll craft something unforgettable."
+      }
+    }
+  },
+  "order": [
+    "header",
+    "carousel",
+    "hero",
+    "image_text"
+  ]
 }

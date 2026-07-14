@@ -1,13 +1,27 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "name": "template 404",
-    "layout": "custom_theme",
-    "wrapper": "div#404_template.custom-class[custom-attribute=hello]",
-    "sections": {
-        "template": {
-            "type": "template-404" 
-        }
+  "layout": "custom_theme",
+  "wrapper": "div#404_template.custom-class[custom-attribute=hello]",
+  "sections": {
+    "header": {
+      "type": "header",
+      "settings": {}
     },
-    "order": [
-        "template"
-    ]
+    "template": {
+      "type": "template-404",
+      "settings": {}
+    }
+  },
+  "order": [
+    "header",
+    "template"
+  ]
 }

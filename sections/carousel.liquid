@@ -1,10 +1,13 @@
 <section class="relative z-10 px-4 py-6 sm:px-6 sm:py-8">
-  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
-  <div class="w-full">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap"></noscript>
+  <div class="w-full max-w-[800px] mx-auto">
     <div class="relative rounded-xl bg-white p-4 shadow-[0_18px_40px_-24px_rgba(95,81,73,0.35)]" data-bloom-carousel>
-      <div class="rounded-lg" style="position: relative; overflow: visible;">
-        <div class="relative overflow-hidden rounded-lg">
-          <div class="relative z-0 flex" style="transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);" data-bloom-track>
+      <div style="position: relative; overflow: visible;">
+        <div class="relative overflow-hidden rounded-lg" style="aspect-ratio: 800/500;">
+          <div class="relative z-0 flex h-full" style="transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);" data-bloom-track>
           {% assign slide_number = 0 %}
           {% for block in section.blocks %}
             {% if block.type == 'slide' %}

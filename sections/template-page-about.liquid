@@ -1,28 +1,33 @@
 <section class="relative z-10 px-4 sm:px-6" style="padding-top: {{ section.settings.section_padding_top }}px; padding-bottom: {{ section.settings.section_padding_bottom }}px;">
   <div class="mx-auto max-w-6xl">
-    <div style="
+    {% liquid
+      assign grid_cols = 'grid-cols-1'
+      if section.settings.show_image
+        assign grid_cols = 'grid-cols-1 md:grid-cols-2'
+      endif
+    %}
+    <div class="grid {{ grid_cols }} gap-0 overflow-hidden" style="
       border-radius: {{ section.settings.card_radius }}px;
       border: {{ section.settings.card_border_width }}px solid {{ section.settings.card_border_color }};
       background-color: {{ section.settings.card_bg_color }};
       box-shadow: 0 10px 30px rgba(30, 39, 71, 0.15), 0 25px 60px rgba(30, 39, 71, 0.1);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      overflow: hidden;
     ">
-      <!-- Image Left Side -->
+      <!-- Image Side (stacked on mobile, left column on desktop) -->
       {% if section.settings.show_image %}
-        <div class="hidden md:flex items-center justify-center overflow-hidden" style="background-color: #F8F9FA;">
+        <div class="flex h-56 items-center justify-center overflow-hidden md:h-full" style="background-color: #F8F9FA;">
           <img
             src="{{ 'girlGlassCup.png' | asset_url }}"
-            alt="About page image"
+            alt="A person holding a personalized Blossom Bloom glass cup"
+            width="459"
+            height="256"
+            loading="lazy"
             class="w-full h-full object-cover"
           >
         </div>
       {% endif %}
 
-      <!-- Content Right Side -->
-      <div style="padding: {{ section.settings.card_padding }}px;">
+      <!-- Content Side -->
+      <div style="padding: clamp(20px, 5vw, {{ section.settings.card_padding }}px);">
         {% if section.settings.show_page_title %}
           <h1 class="font-serif" style="
             font-size: {{ section.settings.title_size }}px;
@@ -50,7 +55,7 @@
           </div>
         {% endif %}
 
-        <div class="leading-relaxed [&_h2]:mt-6 [&_h2]:mb-4 [&_h2]:font-serif [&_h2]:text-2xl [&_h3]:mt-5 [&_h3]:mb-3 [&_h3]:font-serif [&_h3]:text-lg [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:underline-offset-2 hover:[&_a]:underline" style="
+        <div class="leading-relaxed [&_h2]:mt-6 [&_h2]:mb-4 [&_h2]:font-serif [&_h2]:text-2xl [&_h3]:mt-5 [&_h3]:mb-3 [&_h3]:font-serif [&_h3]:text-lg [&_p]:mb-4 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6 [&_ol]:mb-4 [&_ol]:list-decimal [&_ol]:pl-6 [&_a]:underline [&_a]:underline-offset-2" style="
           font-size: {{ section.settings.content_font_size }}px;
           color: {{ section.settings.text_color }};
           line-height: 1.8;
@@ -67,7 +72,6 @@
         </div>
       </div>
     </div>
-  </div>
   </div>
 </section>
 
@@ -134,13 +138,13 @@
       "type": "color",
       "id": "text_color",
       "label": "Text color",
-      "default": "#4A4A4A"
+      "default": "#5F5149"
     },
     {
       "type": "color",
       "id": "heading_color",
       "label": "Heading color",
-      "default": "#1E2747"
+      "default": "#8B6F5C"
     },
     {
       "type": "color",
@@ -162,7 +166,7 @@
       "type": "color",
       "id": "card_border_color",
       "label": "Card border color",
-      "default": "#E0E0E0"
+      "default": "#F5D5C8"
     },
     {
       "type": "range",

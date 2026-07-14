@@ -4,6 +4,49 @@
 @source "../layout/**/*.liquid";
 @source "../templates/**/*.liquid";
 
+@theme {
+	--color-atelier-mocha: #8B6F5C;
+	--color-mocha-hover: #6B5F4C;
+	--color-mocha-dark: #6F5848;
+	--color-rose-coral: #BC5254;
+	--color-rose-coral-hover: #A24E50;
+	--color-cocoa-ink: #5F5149;
+	--color-blush-peach: #F5D5C8;
+	--color-soft-pink: #F8C8DC;
+	--color-forest-accent: #1F4D3A;
+	--color-wine: #6E1F2E;
+	--color-wine-hover: #5A1825;
+}
+
+@layer base {
+	[x-cloak] {
+		display: none !important;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		*,
+		*::before,
+		*::after {
+			transition-duration: 0.01ms !important;
+			animation-duration: 0.01ms !important;
+			animation-iteration-count: 1 !important;
+			scroll-behavior: auto !important;
+		}
+	}
+
+	a:focus-visible,
+	button:focus-visible,
+	input:focus-visible,
+	select:focus-visible,
+	textarea:focus-visible,
+	summary:focus-visible,
+	[tabindex]:focus-visible {
+		outline: 2px solid var(--color-rose-coral);
+		outline-offset: 2px;
+		border-radius: 3px;
+	}
+}
+
 @layer utilities {
 	.font-menu-urban {
 		font-family: "Avenir Next", Avenir, "Helvetica Neue", Arial, sans-serif;

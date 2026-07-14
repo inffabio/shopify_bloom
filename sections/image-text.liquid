@@ -1,0 +1,135 @@
+{% assign image_block = section.blocks | where: 'type', 'image_block' | first %}
+{% assign text_block = section.blocks | where: 'type', 'text_block' | first %}
+{% assign img_w = section.settings.image_width | plus: 0 %}
+{% assign txt_w = 100 | minus: img_w %}
+{% assign border_top = 0 %}
+{% assign border_bot = 0 %}
+{% if section.settings.border_lines == 'top' or section.settings.border_lines == 'both' %}
+  {% assign border_top = section.settings.border_thickness %}
+{% endif %}
+{% if section.settings.border_lines == 'bottom' or section.settings.border_lines == 'both' %}
+  {% assign border_bot = section.settings.border_thickness %}
+{% endif %}
+
+<section class="image-text-{{ section.id }} relative z-10 w-full">
+  <div class="container mx-auto max-w-4xl" style="
+    border-top: {{ border_top }}px solid;
+    border-bottom: {{ border_bot }}px solid;
+    border-top-color: color-mix(in srgb, {{ section.settings.border_color }} {{ section.settings.border_opacity }}%, transparent);
+    border-bottom-color: color-mix(in srgb, {{ section.settings.border_color }} {{ section.settings.border_opacity }}%, transparent);
+    padding: {{ section.settings.padding_top }}px {{ section.settings.section_padding_x }}px {{ section.settings.padding_bottom }}px;
+  ">
+    <div class="flex flex-col md:flex-row items-center" style="gap: {{ section.settings.block_gap }}px;">
+
+      {% if image_block != blank and image_block.settings.position == 'right' %}
+        <div class="text-col w-full flex flex-col justify-center" style="padding: {{ section.settings.text_padding }}px;">
+          {% if section.settings.heading != blank %}
+            <h2 class="font-serif text-balance" style="font-size: clamp(1.5rem, 3.5vw, 2.25rem); color: {{ section.settings.heading_color }}; font-weight: 400; line-height: 1.2; margin: 0 0 0.75rem 0;">{{ section.settings.heading }}</h2>
+          {% endif %}
+          {% if text_block != blank %}
+            <div class="prose max-w-none" style="font-size: {{ text_block.settings.text_size }}px; color: {{ text_block.settings.text_color }}; line-height: 1.8;">
+              {{ text_block.settings.text_content }}
+            </div>
+          {% elsif section.settings.subtitle != blank %}
+            <div class="prose max-w-none" style="font-size: {{ section.settings.body_size }}px; color: {{ section.settings.body_color }}; line-height: 1.8;">
+              <p>{{ section.settings.subtitle }}</p>
+            </div>
+          {% endif %}
+        </div>
+        {% if image_block.settings.image != blank %}
+          <div class="img-col w-full flex justify-center">
+            <div class="rounded-xl bg-white p-3 shadow-[0_18px_40px_-24px_rgba(95,81,73,0.35)]" style="max-width: {{ section.settings.image_max_width | plus: 24 }}px; width: 100%;">
+              <div class="overflow-hidden" style="border-radius: {{ section.settings.image_radius }}px; width: 100%; line-height: 0;">
+                <img src="{{ image_block.settings.image | image_url: width: 800 }}" alt="{{ image_block.settings.image.alt | escape }}" width="{{ image_block.settings.image.width }}" height="{{ image_block.settings.image.height }}" class="w-full h-auto block" loading="lazy">
+              </div>
+            </div>
+          </div>
+        {% endif %}
+
+      {% else %}
+        {% if image_block != blank and image_block.settings.image != blank %}
+          <div class="img-col w-full flex justify-center">
+            <div class="rounded-xl bg-white p-3 shadow-[0_18px_40px_-24px_rgba(95,81,73,0.35)]" style="max-width: {{ section.settings.image_max_width | plus: 24 }}px; width: 100%;">
+              <div class="overflow-hidden" style="border-radius: {{ section.settings.image_radius }}px; width: 100%; line-height: 0;">
+                <img src="{{ image_block.settings.image | image_url: width: 800 }}" alt="{{ image_block.settings.image.alt | escape }}" width="{{ image_block.settings.image.width }}" height="{{ image_block.settings.image.height }}" class="w-full h-auto block" loading="lazy">
+              </div>
+            </div>
+          </div>
+        {% endif %}
+        <div class="text-col w-full flex flex-col justify-center" style="padding: {{ section.settings.text_padding }}px;">
+          {% if section.settings.heading != blank %}
+            <h2 class="font-serif text-balance" style="font-size: clamp(1.5rem, 3.5vw, 2.25rem); color: {{ section.settings.heading_color }}; font-weight: 400; line-height: 1.2; margin: 0 0 0.75rem 0;">{{ section.settings.heading }}</h2>
+          {% endif %}
+          {% if text_block != blank %}
+            <div class="prose max-w-none" style="font-size: {{ text_block.settings.text_size }}px; color: {{ text_block.settings.text_color }}; line-height: 1.8;">
+              {{ text_block.settings.text_content }}
+            </div>
+          {% elsif section.settings.subtitle != blank %}
+            <div class="prose max-w-none" style="font-size: {{ section.settings.body_size }}px; color: {{ section.settings.body_color }}; line-height: 1.8;">
+              <p>{{ section.settings.subtitle }}</p>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+
+    </div>
+  </div>
+</section>
+
+{% stylesheet %}
+  @media screen and (min-width: 768px) {
+    .image-text-{{ section.id }} .img-col {
+      width: {{ img_w }}%;
+    }
+    .image-text-{{ section.id }} .text-col {
+      width: {{ txt_w }}%;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Image + Text",
+  "settings": [
+    { "type": "range", "id": "padding_top", "label": "Top padding", "min": 0, "max": 160, "step": 10, "unit": "px", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "label": "Bottom padding", "min": 0, "max": 160, "step": 10, "unit": "px", "default": 80 },
+    { "type": "range", "id": "section_padding_x", "label": "Horizontal padding", "min": 0, "max": 80, "step": 5, "unit": "px", "default": 20 },
+    { "type": "range", "id": "block_gap", "label": "Gap", "min": 10, "max": 120, "step": 5, "unit": "px", "default": 60 },
+    { "type": "range", "id": "text_padding", "label": "Text padding", "min": 0, "max": 60, "step": 5, "unit": "px", "default": 20 },
+    { "type": "range", "id": "image_max_width", "label": "Image max width", "min": 200, "max": 600, "step": 20, "unit": "px", "default": 400 },
+    { "type": "range", "id": "image_radius", "label": "Image radius", "min": 0, "max": 40, "step": 2, "unit": "px", "default": 16 },
+    { "type": "select", "id": "image_width", "label": "Image width", "options": [ { "value": "33", "label": "Narrow (33%)" }, { "value": "40", "label": "Small (40%)" }, { "value": "50", "label": "Balanced (50%)" }, { "value": "60", "label": "Large (60%)" }, { "value": "66", "label": "Wide (66%)" } ], "default": "50" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Made with care, for someone you love" },
+    { "type": "color", "id": "heading_color", "label": "Heading color", "default": "#8B6F5C" },
+    { "type": "textarea", "id": "subtitle", "label": "Body text", "default": "Create a one-of-a-kind gift that speaks from the heart. From custom names to special dates, we'll craft something unforgettable." },
+    { "type": "color", "id": "body_color", "label": "Body text color", "default": "#5F5149" },
+    { "type": "range", "id": "body_size", "label": "Body text size", "min": 14, "max": 24, "step": 1, "unit": "px", "default": 16 },
+    { "type": "header", "content": "Decorative lines" },
+    { "type": "select", "id": "border_lines", "label": "Lines position", "options": [ { "value": "none", "label": "None" }, { "value": "top", "label": "Top only" }, { "value": "bottom", "label": "Bottom only" }, { "value": "both", "label": "Both" } ], "default": "none" },
+    { "type": "range", "id": "border_thickness", "label": "Line thickness", "min": 1, "max": 5, "step": 1, "unit": "px", "default": 3 },
+    { "type": "color", "id": "border_color", "label": "Line color", "default": "#8B6F5C" },
+    { "type": "range", "id": "border_opacity", "label": "Line opacity", "min": 5, "max": 100, "step": 5, "unit": "%", "default": 15 }
+  ],
+  "blocks": [
+    {
+      "type": "image_block", "name": "Image",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "Image" },
+        { "type": "select", "id": "position", "label": "Image position", "options": [ { "value": "left", "label": "Left" }, { "value": "right", "label": "Right" } ], "default": "left" }
+      ]
+    },
+    {
+      "type": "text_block", "name": "Rich text (optional)",
+      "settings": [
+        { "type": "richtext", "id": "text_content", "label": "Rich text (overrides body text)", "default": "<p>Share your story, describe your product, or highlight what makes you unique.</p>" },
+        { "type": "range", "id": "text_size", "label": "Font size", "min": 14, "max": 24, "step": 1, "unit": "px", "default": 16 },
+        { "type": "color", "id": "text_color", "label": "Text color", "default": "#5F5149" }
+      ]
+    }
+  ],
+  "max_blocks": 2,
+  "presets": [
+    { "name": "Image + Text", "category": "Image", "blocks": [ { "type": "image_block" } ] }
+  ]
+}
+{% endschema %}

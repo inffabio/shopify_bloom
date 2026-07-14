@@ -8,4 +8,46 @@
      "theme_support_url" : "https://github.com/inffabio/shopify_bloom/issues"
    }
 
+  ,
+  {
+    "name": "Cores de Fundo das Páginas",
+    "settings": [
+      {
+        "type": "color",
+        "id": "bg_index",
+        "label": "Cor de fundo da Home (index)",
+        "default": "#BFA6A0"
+      },
+      {
+        "type": "color",
+        "id": "bg_collection",
+        "label": "Cor de fundo das Coleções",
+        "default": "#DED9E2"
+      },
+      {
+        "type": "color",
+        "id": "bg_product",
+        "label": "Cor de fundo dos Produtos",
+        "default": "#C0B9DD"
+      },
+      {
+        "type": "color",
+        "id": "bg_cart",
+        "label": "Cor de fundo do Carrinho",
+        "default": "#80A1D4"
+      },
+      {
+        "type": "color",
+        "id": "bg_page",
+        "label": "Cor de fundo das Páginas",
+        "default": "#75C9C8"
+      },
+      {
+        "type": "color",
+        "id": "bg_404",
+        "label": "Cor de fundo da página 404",
+        "default": "#E7E4F1"
+      }
+    ]
+  }
 ]

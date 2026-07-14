@@ -15,7 +15,7 @@
     function paintDots(active) {
       $dots.each(function (index) {
         $(this).attr('aria-pressed', index === active ? 'true' : 'false');
-        $(this).css('background-color', index === active ? '#1F4D3A' : 'rgba(31,77,58,0.25)');
+        $(this).find('span').css('background-color', index === active ? 'var(--color-forest-accent)' : '#A8C9C7');
       });
     }
 

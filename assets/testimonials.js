@@ -15,9 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
       slide.classList.toggle('hidden', i !== currentIndex);
     });
     dots.forEach((dot, i) => {
-      dot.classList.toggle('bg-[#8B6F5C]', i === currentIndex);
-      dot.classList.toggle('bg-[#8B6F5C]/30', i !== currentIndex);
-      dot.setAttribute('aria-pressed', i === currentIndex ? 'true' : 'false');
+      const isActive = i === currentIndex;
+      dot.querySelector('span').classList.toggle('bg-atelier-mocha', isActive);
+      dot.querySelector('span').classList.toggle('bg-atelier-mocha/30', !isActive);
+      dot.setAttribute('aria-pressed', isActive ? 'true' : 'false');
     });
   }
 

@@ -11,9 +11,9 @@
             <!-- STORE NAME / STORE LOGO -->
             <div class="flex justify-start lg:flex-1 truncate">
                 {% if section.settings.Logo %}
-                    <img src="{{ section.settings.Logo | image_url: width: 200 }}" alt="Logo" width="{{ section.settings.Logo.width }}" height="{{ section.settings.Logo.height }}">
+                    <img src="{{ section.settings.Logo | image_url: width: 200 }}" alt="{{ shop.name | escape }}" width="{{ section.settings.Logo.width }}" height="{{ section.settings.Logo.height }}">
                     {% else %}
-                       <img src="{{ 'logoblossom.png' | asset_url }}" alt="Logo" width="192" height="64" class="w-48 h-16 ">
+                       <img src="{{ 'logoblossom.png' | asset_url }}" alt="{{ shop.name | escape }}" width="192" height="64" class="w-48 h-16 ">
                 {% endif %}
             </div>
 
@@ -21,7 +21,7 @@
                 <div class="relative" data-mini-cart-root data-money-format="{{ shop.money_format | escape }}">
                     <button
                         type="button"
-                        class="relative inline-flex items-center justify-center rounded-full p-2 text-[#8B6F5C] transition hover:bg-white/60"
+                        class="relative inline-flex items-center justify-center rounded-full p-2 text-atelier-mocha transition hover:bg-white/60"
                         data-mini-cart-toggle
                         aria-expanded="false"
                         aria-controls="mini-cart-drawer"
@@ -29,8 +29,8 @@
                         {% render 'icon-shopping-bag' %}
                         {% if cart.items.size > 0 %}
                         <span
-                            class="absolute -right-1 -top-1 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-[#8B6F5C] px-1 text-[11px] font-semibold leading-none text-white"
-                            style="background-color: #1F4D3A;"
+                            class="absolute -right-1 -top-1 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-semibold leading-none text-white"
+                            style="background-color: var(--color-forest-accent);"
                             data-mini-cart-count
                         >
                             {{ cart.items | size }}
@@ -42,41 +42,41 @@
 
                     <aside
                         id="mini-cart-drawer"
-                        class="pointer-events-none fixed right-0 top-0 z-50 hidden h-full w-[86vw] max-w-sm translate-x-full overflow-hidden border-l border-[#8B6F5C]/15 bg-white shadow-[0_20px_80px_-20px_rgba(0,0,0,0.45)] transition-transform duration-300 ease-out"
+                        class="pointer-events-none fixed right-0 top-0 z-50 hidden h-full w-[86vw] max-w-sm translate-x-full overflow-hidden border-l border-atelier-mocha/15 bg-white shadow-[0_20px_80px_-20px_rgba(0,0,0,0.45)] transition-transform duration-300 ease-out"
                         data-mini-cart-panel
                     >
-                        <div class="flex items-center justify-between border-b border-[#8B6F5C]/10 bg-linear-to-r from-[#FFF8F3] to-[#FFEDEC] px-4 py-4">
+                        <div class="flex items-center justify-between border-b border-atelier-mocha/10 bg-linear-to-r from-[#FFF8F3] to-[#FFEDEC] px-4 py-4">
                             <div>
-                                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-[#B79A8D]">Mini cart</p>
-                                <h3 class="mt-1 text-base font-semibold text-[#8B6F5C]">Your selected products</h3>
+                                <p class="text-[11px] font-semibold uppercase tracking-[0.22em] text-mocha-dark">Mini cart</p>
+                                <h3 class="mt-1 text-base font-semibold text-atelier-mocha">Your selected products</h3>
                             </div>
-                            <button type="button" class="rounded-full p-2 text-[#8B6F5C] hover:bg-white/60" data-mini-cart-close aria-label="Close mini cart">
+                            <button type="button" class="rounded-full p-2 text-atelier-mocha hover:bg-white/60" data-mini-cart-close aria-label="Close mini cart">
                                 {% render 'icon-close' %}
                             </button>
                         </div>
 
                         <div class="h-[calc(100%-15rem)] overflow-y-auto px-4 py-4" data-mini-cart-items>
-                            <p class="text-sm text-[#8B6F5C]/70">Loading cart...</p>
+                            <p class="text-sm text-mocha-dark">Loading cart...</p>
                         </div>
 
-                        <div class="space-y-4 border-t border-[#8B6F5C]/10 bg-[#FFFBF9] px-4 py-4">
+                        <div class="space-y-4 border-t border-atelier-mocha/10 bg-[#FFFBF9] px-4 py-4">
                             <div class="flex items-center justify-between text-sm">
-                                <span class="text-[#8B6F5C]/70">Subtotal</span>
-                                <span class="font-semibold text-[#8B6F5C]" data-mini-cart-subtotal>{{ cart.total_price | money }}</span>
+                                <span class="text-mocha-dark">Subtotal</span>
+                                <span class="font-semibold text-atelier-mocha" data-mini-cart-subtotal>{{ cart.total_price | money }}</span>
                             </div>
 
                             <div class="grid gap-2">
                                 <a
                                     href="{{ routes.cart_url }}"
-                                    class="inline-flex w-full items-center justify-center rounded-full border border-[#8B6F5C]/20 bg-white px-4 py-2 text-sm font-semibold text-[#8B6F5C] transition hover:bg-[#FDF6F1]"
+                                    class="inline-flex w-full items-center justify-center rounded-full border border-atelier-mocha/20 bg-white px-4 py-2 text-sm font-semibold text-atelier-mocha transition hover:bg-[#FDF6F1]"
                                 >
                                     View cart
                                 </a>
                                 <a
                                     href="/checkout"
-                                    class="inline-flex w-full items-center justify-center rounded-full bg-[#cb6264] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#b55759]"
+                                    class="inline-flex w-full items-center justify-center rounded-full bg-rose-coral px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-coral-hover"
                                 >
-                                    Finish buy
+                                    Checkout
                                 </a>
                             </div>
                         </div>
@@ -85,7 +85,9 @@
 
                 <!-- Hamburger Menu (Mobile Only) -->
                 <button x-on:click="mobileMenuOpen = true" type="button"
-                    class="p-2 inline-flex items-center justify-center focus:outline-none">
+                    aria-label="Open menu"
+                    x-bind:aria-expanded="mobileMenuOpen"
+                    class="p-2 inline-flex items-center justify-center rounded-full text-atelier-mocha transition hover:bg-white/60">
                     {% render 'icon-hamburguer-menu' %}
                 </button>
             </div>
@@ -99,12 +101,12 @@
                 <div x-data="{ open: false }" class="relative">
 
                     <button x-on:click="open = !open" type="button"
-                        class="font-menu-urban inline-flex items-center text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
+                        class="font-menu-urban inline-flex items-center text-[0.95rem] text-atelier-mocha hover:text-mocha-hover transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
                         {{ link.title }}
                         {% render 'icon-dropdown' %}
                     </button>
 
-                    <div x-show="open" x-on:click.outside="open = false"
+                    <div x-show="open" x-cloak x-on:click.outside="open = false"
                         class="absolute z-60 mt-4 min-w-60 max-w-88 md:left-0 xl:left-auto xl:right-0"
                         x-transition:enter="transition ease-out duration-150"
                         x-transition:enter-start="opacity-0 -translate-y-1"
@@ -124,7 +126,7 @@
                             <div class="relative z-10 grid gap-3 px-4 py-4">
                                 {% for childLink in link.links %}
                                     <!-- CREATE THE SUBLINK -->
-                                    <a href="{{ childLink.url }}" class="font-menu-urban rounded-xl px-3 py-2 text-[#8B6F5C] hover:bg-[#FFF7F3] hover:text-[#6B5F4C] transition-colors no-underline font-semibold text-[0.82rem] tracking-[0.08em] uppercase">
+                                    <a href="{{ childLink.url }}" class="font-menu-urban rounded-xl px-3 py-2 text-atelier-mocha hover:bg-[#FFF7F3] hover:text-mocha-hover transition-colors no-underline font-semibold text-[0.82rem] tracking-[0.08em] uppercase">
                                         <div>
                                             <p class="text-base font-medium">
                                                 {{ childLink.title }}
@@ -139,7 +141,7 @@
 
                 {% else %}
                 <div class="relative">
-                    <a href="{{ link.url }}" class="font-menu-urban text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
+                    <a href="{{ link.url }}" class="font-menu-urban text-[0.95rem] text-atelier-mocha hover:text-mocha-hover transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
                         {{ link.title }}
                     </a>
                 </div>
@@ -152,7 +154,7 @@
                 <div class="relative">
                     <button
                         type="button"
-                        class="relative inline-flex items-center justify-center text-[#8B6F5C] transition-colors hover:text-[#6B5F4C]"
+                        class="relative inline-flex items-center justify-center text-atelier-mocha transition-colors hover:text-mocha-hover"
                         data-mini-cart-toggle
                         aria-expanded="false"
                         aria-controls="mini-cart-panel"
@@ -160,8 +162,8 @@
                         {% render 'icon-shopping-bag' %}
                         {% if cart.items.size > 0 %}
                         <span
-                            class="absolute -right-2 -top-2 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full bg-[#8B6F5C] px-1 text-[11px] font-semibold leading-none text-white"
-                            style="background-color: #1F4D3A;"
+                            class="absolute -right-2 -top-2 inline-flex min-h-5 min-w-5 items-center justify-center rounded-full px-1 text-[11px] font-semibold leading-none text-white"
+                            style="background-color: var(--color-forest-accent);"
                             data-mini-cart-count
                         >
                             {{ cart.items | size }}
@@ -171,61 +173,59 @@
 
                     <div
                         id="mini-cart-panel"
-                        class="pointer-events-none absolute right-0 z-30 mt-4 hidden w-[24rem] overflow-hidden rounded-3xl border border-[#8B6F5C]/15 bg-white shadow-[0_28px_80px_-40px_rgba(139,111,92,0.6)]"
+                        class="pointer-events-none absolute right-0 z-30 mt-4 hidden w-[24rem] overflow-hidden rounded-3xl border border-atelier-mocha/15 bg-white shadow-[0_28px_80px_-40px_rgba(139,111,92,0.6)]"
                         data-mini-cart-panel
                     >
                         <div class="bg-linear-to-r from-[#FFF8F3] to-[#FFEDEC] px-5 py-4">
-                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-[#B79A8D]">Mini cart</p>
-                            <h3 class="mt-1 text-lg font-semibold text-[#8B6F5C]">Your selected products</h3>
+                            <p class="text-xs font-semibold uppercase tracking-[0.22em] text-mocha-dark">Mini cart</p>
+                            <h3 class="mt-1 text-lg font-semibold text-atelier-mocha">Your selected products</h3>
                         </div>
 
                         <div class="max-h-80 overflow-y-auto px-5 py-4" data-mini-cart-items>
-                            <p class="text-sm text-[#8B6F5C]/70">Loading cart...</p>
+                            <p class="text-sm text-mocha-dark">Loading cart...</p>
                         </div>
 
-                        <div class="space-y-4 border-t border-[#8B6F5C]/10 bg-[#FFFBF9] px-5 py-4">
+                        <div class="space-y-4 border-t border-atelier-mocha/10 bg-[#FFFBF9] px-5 py-4">
                             <div class="flex items-center justify-between text-sm">
-                                <span class="text-[#8B6F5C]/70">Subtotal</span>
-                                <span class="font-semibold text-[#8B6F5C]" data-mini-cart-subtotal>{{ cart.total_price | money }}</span>
+                                <span class="text-mocha-dark">Subtotal</span>
+                                <span class="font-semibold text-atelier-mocha" data-mini-cart-subtotal>{{ cart.total_price | money }}</span>
                             </div>
 
                             <div class="grid gap-2">
                                 <a
                                     href="{{ routes.cart_url }}"
-                                    class="inline-flex w-full items-center justify-center rounded-full border border-[#8B6F5C]/20 bg-white px-4 py-2 text-sm font-semibold text-[#8B6F5C] transition hover:bg-[#FDF6F1]"
+                                    class="inline-flex w-full items-center justify-center rounded-full border border-atelier-mocha/20 bg-white px-4 py-2 text-sm font-semibold text-atelier-mocha transition hover:bg-[#FDF6F1]"
                                 >
                                     View cart
                                 </a>
                                 <a
                                     href="/checkout"
-                                    class="inline-flex w-full items-center justify-center rounded-full bg-[#cb6264] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#b55759]"
+                                    class="inline-flex w-full items-center justify-center rounded-full bg-rose-coral px-4 py-2 text-sm font-semibold text-white transition hover:bg-rose-coral-hover"
                                 >
-                                    Finish buy
+                                    Checkout
                                 </a>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <a class="font-menu-urban text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">Login</a>
-                <a class="font-menu-urban text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">Register</a>
             </div>
         </div>
     </div>
 
     <!-- MOBILE MENU CONTAINER -->
-    <div x-show="mobileMenuOpen" class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
+    <div x-show="mobileMenuOpen" x-cloak class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
         <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
             <div class="p-5 divide-y-2 divide-gray-50">
 
                 <!-- MOBILE MENU HEADER TITLE PLUS CLOSE BUTTON -->
                 <div class="flex items-center justify-between pb-3">
                     <div>
-                        <h1 class="text-lg text-[#8B6F5C]">{{ shop.name }}</h1>
+                        <h1 class="text-lg text-atelier-mocha">{{ shop.name }}</h1>
                     </div>
                     <div class="-mr-2">
                         <button x-on:click="mobileMenuOpen = false" type="button"
-                            class="bg-white rounded-md  text-[#8B6F5C]  font-bold">
+                            class="bg-white rounded-md  text-atelier-mocha  font-bold">
                             {% render 'icon-close' %}
                         </button>
                     </div>
@@ -239,22 +239,22 @@
                         {% if link.links != blank %}
                             <div x-data="{ {{link_handle}}: false }" class="relative">
                                 <button x-on:click="{{link_handle}} = !{{link_handle}}" type="button"
-                                    class="font-menu-urban text-[0.95rem] text-[#8B6F5C] hover:text-[#6B5F4C] transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase flex items-center justify-between w-full">
+                                    class="font-menu-urban text-[0.95rem] text-atelier-mocha hover:text-mocha-hover transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase flex items-center justify-between w-full">
                                     <div>{{ link.title }}</div>
                                     {% render 'icon-dropdown' %}
                                 </button>
 
-                                <div x-show="{{link_handle}}" class="grid gap-y-7 py-3">
+                                <div x-show="{{link_handle}}" x-cloak class="grid gap-y-7 py-3">
                                     {% for childlink in link.links %}
                                         <a href="{{ childlink.url }}" class="font-menu-urban p-3 hover:bg-gray-200 transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
-                                            <span class="ml-3  text-base font-medium text-[#8B6F5C]">{{ childlink.title }}</span>
+                                            <span class="ml-3  text-base font-medium text-atelier-mocha">{{ childlink.title }}</span>
                                         </a>
                                     {% endfor %}
                                 </div>
                             </div>
                         {% else %}
                         <a href="{{ link.url }}"
-                            class="font-menu-urban -m-3 p-3 flex items-center rounded-md text-[#8B6F5C] hover:text-[#6B5F4C] hover:bg-gray-200 transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
+                            class="font-menu-urban -m-3 p-3 flex items-center rounded-md text-atelier-mocha hover:text-mocha-hover hover:bg-gray-200 transition-colors no-underline font-semibold tracking-[0.08em] whitespace-nowrap uppercase">
                             {{ link.title }}
                         </a>
                         {% endif %}

@@ -1,40 +1,22 @@
 <!DOCTYPE html>
 <html lang="{{ request.locale.iso_code }}">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="{{ 'favicon-32x32.png' | asset_url }}" type="image/png" />
-    <title>{{ page_title }}</title>
-    {{ content_for_header }}
-    {{ 'tailwind.css' | asset_url | stylesheet_tag }}
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="{{ 'favicon-32x32.png' | asset_url }}" type="image/png">
+  <title>{{ page_title }}</title>
+  {{ content_for_header }}
+  {{ 'tailwind.css' | asset_url | stylesheet_tag }}
 </head>
-
 {% liquid
-    assign page_bg = '#F7F4EA'
-
-    if template.name == 'index'
-        assign page_bg = '#C0B9DD'
-    elsif template.name == 'collection'
-        assign page_bg = '#DED9E2'
-    elsif template.name == 'product'
-        assign page_bg = '#C0B9DD'
-    elsif template.name == 'cart'
-        assign page_bg = '#80A1D4'
-    elsif template.name == 'page'
-        assign page_bg = '#75C9C8'
-    elsif template.name == '404'
-        assign page_bg = '#E7E4F1'
-    endif
+  assign page_bg = '#D4B8A8'
+  assign page_ink = '#4D3D32'
 %}
-
-<body class="relative isolate flex min-h-screen flex-col overflow-x-hidden text-[#5f5149]" style="background-color: {{ page_bg }};">
-    {% section 'menu-bar' %}
-
-    <main class="flex-1">
+<body class="relative isolate flex min-h-screen flex-col overflow-x-hidden" style="background-color: {{ page_bg }}; color: {{ page_ink }};">
+  {% section 'menu-bar' %}
+  <main class="flex-1">
     {{ content_for_layout }}
-    </main>
-
-        {% sections 'footer-group' %}
+  </main>
+  {% sections 'footer-group' %}
 </body>
-
 </html>
